@@ -3,6 +3,7 @@
 
 ## Integrantes do grupo 
 Nícholas Silva - nichcs@gmail.com<br>
+Gabriel Ricardo - gabrielricardo30112002@gmail.com<br>
 
 ## Descrição geral do projeto 
 O BeatfyHub é um player de música que permite tocar seus arquivos locais de áudio e possui integração com o Spotify, trazendo uma gama nova de funções personalizadas. Ele é feito para qualquer um que deseje ter mais controle sobre suas músicas e playlists.
