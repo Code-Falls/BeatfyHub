@@ -2,9 +2,6 @@
 
 
 ## Integrantes do grupo 
-Gabriel Cisneiros - gabrielcisneirossoliveira@gmail.com<br>
-Gabriel Ricardo - gabrielricardo30112002@gmail.com<br>
-Marcela Hadassa - marcelahadassa.pereira@gmail.com<br>
 Nícholas Silva - nichcs@gmail.com<br>
 
 ## Descrição geral do projeto 
