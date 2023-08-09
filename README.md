@@ -18,6 +18,7 @@ O BeatfyHub é um player de música que permite tocar seus arquivos locais de á
 <br> - Histórico de músicas tocadas com uma possível função de visualização por artista.
 <br> - Controlar a reprodução do streaming de músicas do seu Spotify.
 
+Link para o vídeo no youtube: https://youtu.be/-uQtISXrlpQ
 
 ## Requisitos do projeto
  * **REQ1** - Para utilizar as funções integradas ao Spotify, será necessário fazer o login com sua conta e isso será feito através do Spotify API.
