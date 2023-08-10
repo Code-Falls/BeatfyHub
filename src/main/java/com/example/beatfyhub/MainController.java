@@ -5,8 +5,23 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.stage.FileChooser;
+import javazoom.jl.player.Player;
+
+import java.io.FileInputStream;
 
 public class MainController {
+
+    private Player player;
+    private File selectedAudioFile;
+    private boolean isPlaying = false;
+
 
     @FXML
     private Button moreButton, homeButton, exploreButton, recentButton, ftbButton, likedButton, artistsButton, albumsButton, loginButton;
@@ -23,6 +38,17 @@ public class MainController {
     @FXML
     private void exploreButtonClick(ActionEvent event){
         System.out.println("botão explore clicado");
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arquivos MP3", "*.mp3"));
+        selectedAudioFile = fileChooser.showOpenDialog(exploreButton.getScene().getWindow());
+
+        if (selectedAudioFile != null) {
+            System.out.println("Arquivo MP3 selecionado: " + selectedAudioFile.getName());
+            if (player != null) {
+                player.close();
+            }
+            isPlaying = false;
+        }
     }
 
     @FXML
@@ -73,6 +99,30 @@ public class MainController {
     @FXML
     private void playMedia(){
         System.out.println("media tocando");
+        if (selectedAudioFile != null) {
+            if (!isPlaying) {
+                try {
+                    FileInputStream fileInputStream = new FileInputStream(selectedAudioFile);
+                    player = new Player(fileInputStream);
+
+                    new Thread(() -> {
+                        try {
+                            player.play();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }).start();
+                    isPlaying = true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                player.close();
+                isPlaying = false;
+            }
+        } else {
+            System.out.println("Nenhum arquivo MP3 selecionado.");
+        }
     }
 
     @FXML
