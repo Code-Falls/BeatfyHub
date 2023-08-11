@@ -1,0 +1,30 @@
+Função de cada botão atualmente:
+
+Para o CRUD das playlists e músicas(apenas .mp3)
+Botão home - lista as playlists existentes
+Botão New Playlist - lê o nome da playlist e a cria
+Botão Explore - abre um FileChooser para que selecione a música e cria ela
+Botão Recent - lê o nome de uma música para remover
+Botão Liked Songs - lê o nome de uma playlist e o nome de uma música para remover da playlist
+Botão Artists - lista as músicas criadas
+Botão Albums - lê o nome de uma playlist e de uma música para adicionar na playlist
+Botão Login(Spotify) - abre um DirectoryChooser para escolher uma pasta e cria todas as músicas que estiverem na pasta
+Botão Favorite Media(estrelinha) - lê o nome de uma playlist e à remove
+Botão Play Media - lê o nome de uma música e a toca
+
+Atualmente as músicas não podem ser pausadas, mas elas param de tocar ao fechar a tela. 
+É possível criar, listar e remover playlists e músicas, adicionar e remover músicas das playlists e tocá-las de forma rudimentar;
+
+É possível ocorrer um erro relacionado ao JavaFX.controls e afins, caso ocorra, é necessário criar uma "run" personalizada
+como demonstrado na imagem "RUN.png"
+
+As seguintes opções são utilizadas no campo de argumentos da VM (é necessário alterar o caminho para o JavaFX): 
+--module-path /home/nicholas/Documentos/openjfx-20.0.2_linux-x64_bin-sdk/javafx-sdk-20.0.2/lib --add-modules javafx.controls,javafx.fxml
+
+
+
+
+
+
+
+
