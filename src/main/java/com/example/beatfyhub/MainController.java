@@ -3,6 +3,8 @@ package com.example.beatfyhub;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -20,8 +22,11 @@ public class MainController {
 
     private Player player;
     private File selectedAudioFile;
+    private int numMusicLabels = 0;
     private boolean isPlaying = false;
 
+    @FXML
+    private GridPane musicGridPane;
 
     @FXML
     private Button moreButton, homeButton, exploreButton, recentButton, ftbButton, likedButton, artistsButton, albumsButton, loginButton;
@@ -48,6 +53,17 @@ public class MainController {
                 player.close();
             }
             isPlaying = false;
+
+            // Adicionar label da música à GridPane
+            Label musicLabel = new Label(selectedAudioFile.getName()); // Nome do arquivo como nome da música (ajuste conforme necessário)
+
+            // Definir posição na GridPane
+            int colIndex = numMusicLabels % 3; // Alternar entre coluna 0 e 1
+            int rowIndex = numMusicLabels / 3; // Aumentar a linha a cada 2 elementos
+
+            musicGridPane.add(musicLabel, colIndex, rowIndex);
+
+            numMusicLabels++;
         }
     }
 
