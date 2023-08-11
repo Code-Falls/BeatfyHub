@@ -36,7 +36,7 @@ public class MainController {
     private Button moreButton, homeButton, exploreButton, recentButton, ftbButton, likedButton, artistsButton, albumsButton, loginButton;
 
     @FXML
-    private ImageView playButton;
+    private ImageView playButton, previousButton, nextButton, loopButton, shuffleButton, favoriteButton;
     @FXML
     private void moreButtonClick(ActionEvent event){
         System.out.println("botão more clicado");
@@ -148,25 +148,55 @@ public class MainController {
         }
     }
 
-    @FXML
-    private void colorizePlayButton(){
-        playButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
+    private void applyColorAnimation(ImageView imageView) {
+        imageView.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                System.out.println("entrou");
-                playButton.setOpacity(0.5);
+                System.out.println("Entrou");
+                imageView.setOpacity(0.5);
+                imageView.setStyle("-fx-background-color: #fff");
             }
-        });    }
-    @FXML
-    private void uncolorizePlayButton(){
-        playButton.setOnMouseExited(new EventHandler<MouseEvent>() {
+        });
+
+        imageView.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                System.out.println("saiu");
-                playButton.setOpacity(1.0);
+                System.out.println("Saiu");
+                imageView.setOpacity(1.0);
+                imageView.setStyle("-fx-background-color: initial");
             }
         });
     }
+
+    @FXML
+    private void toColorPlayButton(){
+        applyColorAnimation(playButton);
+    }
+    @FXML
+    private void toColorFavoriteButton() {
+        applyColorAnimation(favoriteButton);
+    }
+
+    @FXML
+    private void toColorPreviousButton() {
+        applyColorAnimation(previousButton);
+    }
+
+    @FXML
+    private void toColorNextButton() {
+        applyColorAnimation(nextButton);
+    }
+
+    @FXML
+    private void toColorShuffleButton() {
+        applyColorAnimation(shuffleButton);
+    }
+
+    @FXML
+    private void toColorLoopButton() {
+        applyColorAnimation(loopButton);
+    }
+
 
     @FXML
     private void nextMedia(){
