@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="467917b0-d825-4d0b-8bc3-42c0ec50935e" name="Changes" comment="play media done, and white icons">
+    <list default="true" id="467917b0-d825-4d0b-8bc3-42c0ec50935e" name="Changes" comment="all downbar buttons animated">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/beatfyhub/fxml/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/beatfyhub/fxml/sample.fxml" afterDir="false" />
@@ -180,7 +180,15 @@
       <option name="project" value="LOCAL" />
       <updated>1691716374761</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="all downbar buttons animated">
+      <option name="closed" value="true" />
+      <created>1691725086062</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1691725086062</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -202,6 +210,7 @@
     <MESSAGE value="itens brancos" />
     <MESSAGE value="second commit" />
     <MESSAGE value="play media done, and white icons" />
-    <option name="LAST_COMMIT_MESSAGE" value="play media done, and white icons" />
+    <MESSAGE value="all downbar buttons animated" />
+    <option name="LAST_COMMIT_MESSAGE" value="all downbar buttons animated" />
   </component>
 </project>
