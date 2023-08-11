@@ -1,12 +1,16 @@
 package com.example.beatfyhub;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -30,6 +34,9 @@ public class MainController {
 
     @FXML
     private Button moreButton, homeButton, exploreButton, recentButton, ftbButton, likedButton, artistsButton, albumsButton, loginButton;
+
+    @FXML
+    private ImageView playButton;
     @FXML
     private void moreButtonClick(ActionEvent event){
         System.out.println("botão more clicado");
@@ -139,6 +146,26 @@ public class MainController {
         } else {
             System.out.println("Nenhum arquivo MP3 selecionado.");
         }
+    }
+
+    @FXML
+    private void colorizePlayButton(){
+        playButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                System.out.println("entrou");
+                playButton.setOpacity(0.5);
+            }
+        });    }
+    @FXML
+    private void uncolorizePlayButton(){
+        playButton.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                System.out.println("saiu");
+                playButton.setOpacity(1.0);
+            }
+        });
     }
 
     @FXML

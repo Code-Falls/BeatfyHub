@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="467917b0-d825-4d0b-8bc3-42c0ec50935e" name="Changes" comment="second commit">
+    <list default="true" id="467917b0-d825-4d0b-8bc3-42c0ec50935e" name="Changes" comment="play media done, and white icons">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/beatfyhub/fxml/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/beatfyhub/fxml/sample.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,7 +53,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Teste-GabrielC&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Teste-Nicholas&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;20&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/gabriel/IdeaProjects/BeatfyHub&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
@@ -160,7 +159,15 @@
       <option name="project" value="LOCAL" />
       <updated>1691613165137</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="play media done, and white icons">
+      <option name="closed" value="true" />
+      <created>1691716374761</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1691716374761</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -181,6 +188,7 @@
     <MESSAGE value="front-end modificado&#10;back-end intuitivo" />
     <MESSAGE value="itens brancos" />
     <MESSAGE value="second commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="second commit" />
+    <MESSAGE value="play media done, and white icons" />
+    <option name="LAST_COMMIT_MESSAGE" value="play media done, and white icons" />
   </component>
 </project>

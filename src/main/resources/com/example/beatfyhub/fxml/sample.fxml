@@ -312,7 +312,7 @@
                               <Image url="@../../../../images/previousButton.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="playButton" fitHeight="45.0" fitWidth="45.0" layoutX="40.0" layoutY="10.0" onMouseClicked="#playMedia" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="playButton" fitHeight="45.0" fitWidth="45.0" layoutX="40.0" layoutY="10.0" onMouseClicked="#playMedia" onMouseEntered="#colorizePlayButton" onMouseExited="#uncolorizePlayButton" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../images/playButton.png" />
                            </image>
