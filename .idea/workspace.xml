@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="467917b0-d825-4d0b-8bc3-42c0ec50935e" name="Changes" comment="all downbar buttons animated">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/beatfyhub/fxml/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/beatfyhub/fxml/sample.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +64,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Teste-Nicholas&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Teste-GabrielC&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;20&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/gabriel/IdeaProjects/BeatfyHub&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
