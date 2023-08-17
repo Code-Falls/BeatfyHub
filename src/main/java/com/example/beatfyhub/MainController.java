@@ -20,9 +20,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javazoom.jl.player.Player;
 
 import java.io.FileInputStream;
+import java.util.Scanner;
 
 public class MainController {
 
@@ -31,6 +33,8 @@ public class MainController {
     private int numMusicLabels = 0;
     private boolean isPlaying = false;
 
+    private ControladorPlayerLocal contPL = new ControladorPlayerLocal();
+    Scanner sc = new Scanner(System.in);
     @FXML
     private GridPane musicGridPane;
 
@@ -60,6 +64,8 @@ public class MainController {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arquivos MP3", "*.mp3"));
         selectedAudioFile = fileChooser.showOpenDialog(exploreButton.getScene().getWindow());
 
+        String nome = sc.next();
+        contPL.adicionarMusica(nome, selectedAudioFile);
         if (selectedAudioFile != null) {
             System.out.println("Arquivo MP3 selecionado: " + selectedAudioFile.getName());
             if (player != null) {
@@ -83,6 +89,12 @@ public class MainController {
     @FXML
     private void recentButtonClick(ActionEvent event) {
         System.out.println("botão recent played clicado");
+        String nome = sc.nextLine();
+        Stage stage = new Stage();
+        FileChooser fc = new FileChooser();
+        File f = fc.showOpenDialog(stage);
+
+        contPL.removerMusica(f);
     }
 
     @FXML
@@ -97,7 +109,9 @@ public class MainController {
 
     @FXML
     private void artistsButtonClick(ActionEvent event) {
+
         System.out.println("botão artists clicado");
+        contPL.listarMusicas();
     }
 
     @FXML
