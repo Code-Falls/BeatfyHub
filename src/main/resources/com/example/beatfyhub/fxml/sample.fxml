@@ -189,7 +189,7 @@
                               <Image url="@../../../../images/searchButton.png" />
                            </image>
                         </ImageView>
-                        <TextField fx:id="searchTextField" prefHeight="29.0" prefWidth="199.0" promptText="Search" style="-fx-background-color: transparent;" />
+                        <TextField fx:id="searchTextField" onKeyPressed="#searchTextFieldEnter" prefHeight="29.0" prefWidth="199.0" promptText="Search" style="-fx-background-color: transparent;" />
                      </children>
                      <padding>
                         <Insets top="6.0" />

@@ -97,6 +97,12 @@ public class MainController {
     }
 
     @FXML
+    private void searchTextFieldEnter() {
+        String search = searchTextField.getText();
+        System.out.println("Nome da playlist: " + search);
+    }
+
+    @FXML
     private void ftbButtonClick(ActionEvent event){
         System.out.println("botão feel the beat clicado");
     }
