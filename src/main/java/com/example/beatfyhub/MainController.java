@@ -1,13 +1,20 @@
 package com.example.beatfyhub;
 
+import com.example.beatfyhub.ControladorPlayerLocal;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
@@ -16,7 +23,6 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
@@ -32,115 +38,95 @@ public class MainController {
     private File selectedAudioFile;
     private int numMusicLabels = 0;
     private boolean isPlaying = false;
-
-    private ControladorPlayerLocal contPL = new ControladorPlayerLocal();
-    Scanner sc = new Scanner(System.in);
     @FXML
     private GridPane musicGridPane;
 
     @FXML
-    private HBox homeContainer, exploreContainer, recentPlayedContainer;
-
-    @FXML
     private Button moreButton, homeButton, exploreButton, recentButton, ftbButton, likedButton, artistsButton, albumsButton, loginButton;
-
     @FXML
     private ImageView playButton, previousButton, nextButton, loopButton, shuffleButton, favoriteButton;
+    @FXML
+    private HBox homeContainer, exploreContainer, recentPlayedContainer;
+    @FXML
+    private TableView<String> musicTableView;
+    @FXML
+    TableColumn<String, String> albumCoverColumn, artistColumn, albumColumn, songColumn;
+
+    private ObservableList<String> songList = FXCollections.observableArrayList();
 
     @FXML
-    private void moreButtonClick(ActionEvent event) {
+    private void moreButtonClick(ActionEvent event){
         System.out.println("botão more clicado");
     }
 
     @FXML
-    private void homeButtonClick(ActionEvent event) {
+    private void homeButtonClick(ActionEvent event){
         System.out.println("botão home clicado");
+
     }
 
     @FXML
     private void exploreButtonClick(ActionEvent event) {
-        System.out.println("botão explore clicado");
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arquivos MP3", "*.mp3"));
-        selectedAudioFile = fileChooser.showOpenDialog(exploreButton.getScene().getWindow());
-
-        String nome = sc.next();
-        contPL.adicionarMusica(nome, selectedAudioFile);
-        if (selectedAudioFile != null) {
-            System.out.println("Arquivo MP3 selecionado: " + selectedAudioFile.getName());
-            if (player != null) {
-                player.close();
-            }
-            isPlaying = false;
-
-            // Adicionar label da música à GridPane
-            Label musicLabel = new Label(selectedAudioFile.getName()); // Nome do arquivo como nome da música (ajuste conforme necessário)
-
-            // Definir posição na GridPane
-            int colIndex = numMusicLabels % 3; // Alternar entre coluna 0 e 1
-            int rowIndex = numMusicLabels / 3; // Aumentar a linha a cada 2 elementos
-
-            musicGridPane.add(musicLabel, colIndex, rowIndex);
-
-            numMusicLabels++;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/new-playlist.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.show();
+            ((Node) (event.getSource())).getScene().getWindow().hide();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    @FXML
-    private void recentButtonClick(ActionEvent event) {
-        System.out.println("botão recent played clicado");
-        String nome = sc.nextLine();
-        Stage stage = new Stage();
-        FileChooser fc = new FileChooser();
-        File f = fc.showOpenDialog(stage);
 
-        contPL.removerMusica(f);
+    @FXML
+    private void recentButtonClick(ActionEvent event){
+        System.out.println("botão recent played clicado");
     }
 
     @FXML
-    private void ftbButtonClick(ActionEvent event) {
+    private void ftbButtonClick(ActionEvent event){
         System.out.println("botão feel the beat clicado");
     }
 
     @FXML
-    private void likedButtonClick(ActionEvent event) {
+    private void likedButtonClick(ActionEvent event){
         System.out.println("botão liked clicado");
     }
 
     @FXML
-    private void artistsButtonClick(ActionEvent event) {
-
+    private void artistsButtonClick(ActionEvent event){
         System.out.println("botão artists clicado");
-        contPL.listarMusicas();
     }
 
     @FXML
-    private void albumsButtonClick(ActionEvent event) {
+    private void albumsButtonClick(ActionEvent event){
         System.out.println("botão albums clicado");
     }
 
     @FXML
-    private void loginButtonClick(ActionEvent event) {
+    private void loginButtonClick(ActionEvent event){
         System.out.println("botão login spotify clicado");
     }
 
     @FXML
-    private void favoriteMedia() {
+    private void favoriteMedia(){
         System.out.println("media favoritada");
     }
 
     @FXML
-    private void shuffleMedia() {
+    private void shuffleMedia(){
         System.out.println("modo aleatorio");
     }
 
     @FXML
-    private void previousMedia() {
+    private void previousMedia(){
         System.out.println("media anterior");
     }
 
     @FXML
-    private void playMedia() {
+    private void playMedia(){
         System.out.println("media tocando");
         if (selectedAudioFile != null) {
             if (!isPlaying) {
