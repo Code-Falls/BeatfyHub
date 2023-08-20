@@ -24,3 +24,7 @@
     -fx-alignment: center-left;
     -fx-background-color: transparent;
 }
+.add-playlist-container {
+    -fx-background-color: #8a1cff;
+    -fx-background-radius: 10;
+}

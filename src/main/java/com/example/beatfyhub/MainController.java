@@ -9,20 +9,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.*;
 
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
@@ -42,11 +38,13 @@ public class MainController {
     private GridPane musicGridPane;
 
     @FXML
-    private Button moreButton, homeButton, exploreButton, recentButton, ftbButton, likedButton, artistsButton, albumsButton, loginButton;
+    private Button moreButton, homeButton, exploreButton, recentButton, ftbButton, likedButton, artistsButton, albumsButton, loginButton, newPlaylistButton, createPlaylistButton, cancelPlaylistButton;
     @FXML
     private ImageView playButton, previousButton, nextButton, loopButton, shuffleButton, favoriteButton;
     @FXML
-    private HBox homeContainer, exploreContainer, recentPlayedContainer;
+    private HBox homeContainer, exploreContainer, recentPlayedContainer, newPlaylistContainer;
+    @FXML
+    private TextField playlistNameTextField, searchTextField;
     @FXML
     private TableView<String> musicTableView;
     @FXML
@@ -67,15 +65,28 @@ public class MainController {
 
     @FXML
     private void exploreButtonClick(ActionEvent event) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/new-playlist.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root1));
-            stage.show();
-            ((Node) (event.getSource())).getScene().getWindow().hide();
-        } catch (Exception e) {
-            e.printStackTrace();
+        System.out.println("botão explore clicado");
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arquivos MP3", "*.mp3"));
+        selectedAudioFile = fileChooser.showOpenDialog(exploreButton.getScene().getWindow());
+
+        if (selectedAudioFile != null) {
+            System.out.println("Arquivo MP3 selecionado: " + selectedAudioFile.getName());
+            if (player != null) {
+                player.close();
+            }
+            isPlaying = false;
+
+            // Adicionar label da música à GridPane
+            Label musicLabel = new Label(selectedAudioFile.getName()); // Nome do arquivo como nome da música (ajuste conforme necessário)
+
+            // Definir posição na GridPane
+            int colIndex = numMusicLabels % 3; // Alternar entre coluna 0 e 1
+            int rowIndex = numMusicLabels / 3; // Aumentar a linha a cada 2 elementos
+
+            musicGridPane.add(musicLabel, colIndex, rowIndex);
+
+            numMusicLabels++;
         }
     }
 
@@ -110,6 +121,20 @@ public class MainController {
         System.out.println("botão login spotify clicado");
     }
 
+    @FXML
+    private void newPlaylistButtonClick(ActionEvent event){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/new-playlist.fxml"));
+            Parent root2 = fxmlLoader.load();
+
+            Stage secondStage = new Stage();
+            secondStage.setTitle("Nova Janela");
+            secondStage.setScene(new Scene(root2));
+            secondStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @FXML
     private void favoriteMedia(){
         System.out.println("media favoritada");
@@ -164,7 +189,12 @@ public class MainController {
         System.out.println("modo loop");
     }
 
-
+    @FXML
+    private void inputPlaylistNameTextFieldContent() {
+        playlistNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("Texto digitado:" + newValue);
+        });
+    }
     private void applyColorAnimationDownBar(ImageView imageView) {
         imageView.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
@@ -213,6 +243,33 @@ public class MainController {
         applyColorAnimationDownBar(loopButton);
     }
 
+    private void applyColorAnimationButton(Button button){
+
+        button.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                System.out.println("Entrou");
+                button.setStyle("-fx-background-color: #060606");
+            }
+        });
+
+        button.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                System.out.println("Saiu");
+                button.setStyle("-fx-background-color: #121212");
+            }
+        });
+    }
+    @FXML
+    private void toColorLikedSongsButton() { applyColorAnimationButton(likedButton);}
+
+    @FXML
+    private void toColorArtistButton() { applyColorAnimationButton(artistsButton);}
+
+    @FXML
+    private void toColorAlbumsButton() { applyColorAnimationButton(albumsButton);}
+
     private void applyColorAnimationSideBar(HBox hBox) {
         hBox.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
@@ -232,6 +289,9 @@ public class MainController {
     }
 
     @FXML
+    private void toColorNewPlaylistButton() {applyColorAnimationSideBar(newPlaylistContainer);}
+
+    @FXML
     private void toColorHomeButton() {
         applyColorAnimationSideBar(homeContainer);
     }
@@ -244,5 +304,25 @@ public class MainController {
     @FXML
     private void toColorRecentPlayedButton() {
         applyColorAnimationSideBar(recentPlayedContainer);
+    }
+
+// #####################################################################################################
+// ----------------------------------NEW-PLAYLIST PAGE--------------------------------------------------
+// #####################################################################################################
+
+    @FXML
+    private void createPlaylistButtonClick(){
+        System.out.println("Playlist criada");
+        String playlistName = playlistNameTextField.getText();
+        System.out.println("Nome da playlist: " + playlistName);
+        Stage stage = (Stage) createPlaylistButton.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void cancelPlaylistButtonClick(){
+        System.out.println("Cancelado");
+        Stage stage = (Stage) cancelPlaylistButton.getScene().getWindow();
+        stage.close();
     }
 }
