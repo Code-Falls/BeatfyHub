@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import java.io.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -42,12 +43,11 @@ public class MainController {
     @FXML
     private TextField playlistNameTextField, searchTextField;
     @FXML
-    private TableView<String> musicTableView;
+    private GridPane musicGridPane;
     @FXML
-    private TableColumn<String, String> albumCoverColumn, artistColumn, albumColumn, songColumn;
-
-    private ObservableList<String> songList = FXCollections.observableArrayList();
-
+    private ScrollPane musicScrollPane;
+    @FXML
+    private Pane musicPane;
     @FXML
     private void moreButtonClick(ActionEvent event) {
         System.out.println("botão more clicado");
@@ -61,7 +61,6 @@ public class MainController {
 
     @FXML
     private void newSongButtonClick(ActionEvent event) {
-        //botão que adiciona músicas por arquivo
         System.out.println("botão explore clicado");
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arquivos MP3", "*.mp3"));
@@ -73,13 +72,25 @@ public class MainController {
                 player.close();
             }
             isPlaying = false;
-
-            // Adicionar nome da música à lista
-            songList.add(selectedAudioFile.getName());
-
-            // Atualizar a TableView automaticamente
-            musicTableView.setItems(songList);
         }
+        Label musicLabel = new Label(selectedAudioFile.getName());
+        int column = numMusicLabels % 3;
+        musicLabel.setPrefHeight(30);
+        numMusicLabels++;
+
+        int row = numMusicLabels / 3;
+
+        if (row > musicGridPane.getRowCount()) {
+            musicGridPane.addRow(row);
+        }
+
+        musicGridPane.add(musicLabel, column, row);
+        musicLabel.setPrefHeight(30);
+        numMusicLabels++;
+
+        double newHeight = musicScrollPane.getPrefHeight() + 30;
+        musicScrollPane.setPrefHeight(newHeight);
+        musicPane.setPrefHeight(newHeight);
     }
 
     @FXML
