@@ -20,6 +20,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javazoom.jl.player.Player;
@@ -73,29 +74,43 @@ public class MainController {
             }
             isPlaying = false;
         }
-        Label musicLabel = new Label(selectedAudioFile.getName());
-        int column = numMusicLabels % 3;
-        musicLabel.setPrefHeight(30);
-        numMusicLabels++;
-
-        int row = numMusicLabels / 3;
-
-        if (row > musicGridPane.getRowCount()) {
-            musicGridPane.addRow(row);
-        }
-
-        musicGridPane.add(musicLabel, column, row);
-        musicLabel.setPrefHeight(30);
-        numMusicLabels++;
-
-        double newHeight = musicScrollPane.getPrefHeight() + 30;
-        musicScrollPane.setPrefHeight(newHeight);
-        musicPane.setPrefHeight(newHeight);
+            Label musicLabel = new Label(selectedAudioFile.getName());
+            int column = numMusicLabels % 3;
+            musicGridPane.add(musicLabel, column, numMusicLabels / 3);
+            musicLabel.setPrefHeight(30);
+            numMusicLabels++;
     }
+
 
     @FXML
     private void newFolderButtonClick(){
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File selectedFolder = directoryChooser.showDialog(newFolderButton.getScene().getWindow());
 
+        if (selectedFolder != null) {
+            File[] musicFiles = selectedFolder.listFiles((dir, name) -> name.toLowerCase().endsWith(".mp3"));
+            if (musicFiles != null) {
+                for (File musicFile : musicFiles) {
+                    contPL.adicionarMusica(musicFile);
+
+                    Label musicLabel = new Label(musicFile.getName());
+                    int column = numMusicLabels % 3;
+                    int row = numMusicLabels / 3;
+
+                    if (row > musicGridPane.getRowCount()) {
+                        musicGridPane.addColumn(column);
+                    }
+
+                    musicGridPane.add(musicLabel, column, row);
+                    musicLabel.setPrefHeight(30);
+                    numMusicLabels++;
+
+                    double newHeight = musicScrollPane.getPrefHeight() + 30;
+                    musicScrollPane.setPrefHeight(newHeight);
+                    musicPane.setPrefHeight(newHeight);
+                }
+            }
+        }
     }
 
     @FXML
