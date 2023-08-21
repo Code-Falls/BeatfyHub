@@ -15,8 +15,8 @@ public class Musica {
     private String path;
     private File mp3;
 
-    public Musica(String nome, File mp3){
-        this.nome = nome;
+    public Musica(File mp3){
+        this.nome = mp3.getName();
         this.mp3 = mp3;
         this.path = mp3.getAbsolutePath();
     }

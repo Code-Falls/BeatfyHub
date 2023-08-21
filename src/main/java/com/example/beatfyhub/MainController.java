@@ -14,9 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-
 import java.io.*;
-
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
@@ -24,7 +22,6 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javazoom.jl.player.Player;
-
 import java.io.FileInputStream;
 import java.util.Scanner;
 
@@ -34,6 +31,7 @@ public class MainController {
     private File selectedAudioFile;
     private int numMusicLabels = 0;
     private boolean isPlaying = false;
+    private ControladorPlayerLocal contPL = new ControladorPlayerLocal();
     @FXML
     private GridPane musicGridPane;
 
@@ -65,11 +63,12 @@ public class MainController {
 
     @FXML
     private void exploreButtonClick(ActionEvent event) {
+        //botão que adiciona músicas por arquivo
         System.out.println("botão explore clicado");
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arquivos MP3", "*.mp3"));
         selectedAudioFile = fileChooser.showOpenDialog(exploreButton.getScene().getWindow());
-
+        contPL.adicionarMusica(selectedAudioFile);
         if (selectedAudioFile != null) {
             System.out.println("Arquivo MP3 selecionado: " + selectedAudioFile.getName());
             if (player != null) {
