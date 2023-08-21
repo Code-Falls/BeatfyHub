@@ -25,6 +25,9 @@
     -fx-background-color: transparent;
 }
 .add-playlist-container {
+    -fx-text-fill: white;
+    -fx-font-weight: Bold;
+    -fx-font-size: 15;
     -fx-background-color: #8a1cff;
     -fx-background-radius: 10;
 }

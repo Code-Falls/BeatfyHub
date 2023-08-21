@@ -30,7 +30,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <VBox prefHeight="227.0" prefWidth="235.0" stylesheets="@../css/style.css">
+            <VBox prefHeight="166.0" prefWidth="235.0" stylesheets="@../css/style.css">
                <children>
                   <VBox prefHeight="152.0" prefWidth="235.0" spacing="10.0">
                      <children>
@@ -54,17 +54,37 @@
                               <Insets left="15.0" />
                            </padding>
                         </HBox>
-                        <HBox fx:id="exploreContainer" alignment="CENTER_LEFT" onMouseEntered="#toColorExploreButton" prefHeight="50.0" prefWidth="200.0" spacing="20.0">
+                        <HBox fx:id="newSongContainer" alignment="CENTER_LEFT" onMouseEntered="#toColorNewSongButton" prefHeight="29.0" prefWidth="235.0" spacing="20.0">
                            <children>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../images/exploreButton.png" />
+                                    <Image url="@../../../../images/songNote.png" />
                                  </image>
                                  <HBox.margin>
                                     <Insets top="5.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <Button fx:id="exploreButton" mnemonicParsing="false" onAction="#exploreButtonClick" prefHeight="33.0" prefWidth="170.0" styleClass="navbar-button" stylesheets="@../css/style.css" text="Explore" textFill="#8a1cff">
+                              <Button fx:id="newSongButton" mnemonicParsing="false" onAction="#newSongButtonClick" prefHeight="57.0" prefWidth="170.0" styleClass="navbar-button" stylesheets="@../css/style.css" text="New Song" textFill="#8a1cff">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <padding>
+                              <Insets left="15.0" />
+                           </padding>
+                        </HBox>
+                        <HBox fx:id="newFolderContainer" alignment="CENTER_LEFT" onMouseEntered="#toColorNewFolderButton" prefHeight="50.0" prefWidth="200.0" spacing="20.0">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../images/exploreFolderButton.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Button fx:id="newFolderButton" mnemonicParsing="false" onAction="#newFolderButtonClick" prefHeight="33.0" prefWidth="170.0" styleClass="navbar-button" stylesheets="@../css/style.css" text="New Folder" textFill="#8a1cff">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
