@@ -1,16 +1,19 @@
 package com.example.beatfyhub;
 
 import com.example.beatfyhub.ControladorPlayerLocal;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -24,12 +27,17 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javazoom.jl.player.Player;
+import javazoom.jl.player.advanced.AdvancedPlayer;
+import java.net.URL;
 import java.io.FileInputStream;
+import java.time.LocalDateTime;
+import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainController {
-
-    private Player player;
+    private MediaPlayer player;
     private File selectedAudioFile;
     private int numMusicLabels = 0;
     private boolean isPlaying = false;
@@ -48,16 +56,47 @@ public class MainController {
     @FXML
     private ScrollPane musicScrollPane;
     @FXML
-    private Pane musicPane;
+    private ProgressBar musicProgressBar;
     @FXML
-    private void moreButtonClick(ActionEvent event) {
-        System.out.println("botão more clicado");
+    private Pane musicPane;
+    private Media media;
+    private MediaPlayer mediaPlayer;
+    private Timer timer;
+    private TimerTask task;
+
+//    public void initialize (URL url, ResourceBundle resourceBundle) {
+//        media = new Media(contPL.getMySongs().get(songNumber).getMp3().toURI().toString());
+//        player = new MediaPlayer(media);
+//    }
+
+    public void beginTimer () {
+        timer = new Timer();
+
+        task = new TimerTask() {
+            public void run() {
+
+                isPlaying = true;
+                double current = mediaPlayer.getCurrentTime().toSeconds();
+                double end = media.getDuration().toSeconds();
+                System.out.println(current/end); //only needed to see the progress value in the console
+                musicProgressBar.setProgress(current/end);
+
+                if (current/end == 1) {
+                    cancelTimer();
+                }
+            }
+        };
+        timer.scheduleAtFixedRate(task, 0, 1000);
     }
+    public void cancelTimer(){
+        isPlaying = false;
+        timer.cancel();
+    }
+
 
     @FXML
     private void homeButtonClick(ActionEvent event) {
         System.out.println("botão home clicado");
-
     }
 
     @FXML
@@ -70,15 +109,10 @@ public class MainController {
         if (selectedAudioFile != null) {
             System.out.println("Arquivo MP3 selecionado: " + selectedAudioFile.getName());
             if (player != null) {
-                player.close();
+                player.pause();
             }
             isPlaying = false;
         }
-            Label musicLabel = new Label(selectedAudioFile.getName());
-            int column = numMusicLabels % 3;
-            musicGridPane.add(musicLabel, column, numMusicLabels / 3);
-            musicLabel.setPrefHeight(30);
-            numMusicLabels++;
     }
 
 
@@ -125,11 +159,6 @@ public class MainController {
     }
 
     @FXML
-    private void ftbButtonClick(ActionEvent event) {
-        System.out.println("botão feel the beat clicado");
-    }
-
-    @FXML
     private void likedButtonClick(ActionEvent event) {
         System.out.println("botão liked clicado");
     }
@@ -142,6 +171,11 @@ public class MainController {
     @FXML
     private void albumsButtonClick(ActionEvent event) {
         System.out.println("botão albums clicado");
+    }
+
+    @FXML
+    private void playlistsButtonClick(ActionEvent event) {
+        System.out.println("botão playlists clicado");
     }
 
     @FXML
@@ -167,11 +201,13 @@ public class MainController {
     @FXML
     private void favoriteMedia() {
         System.out.println("media favoritada");
+        favoriteButton.setImage(new Image("images/fullLikedButton.png"));
     }
 
     @FXML
     private void shuffleMedia() {
         System.out.println("modo aleatorio");
+
     }
 
     @FXML
@@ -183,28 +219,30 @@ public class MainController {
     private void playMedia() {
         System.out.println("media tocando");
         if (selectedAudioFile != null) {
-            if (!isPlaying) {
-                try {
-                    FileInputStream fileInputStream = new FileInputStream(selectedAudioFile);
-                    player = new Player(fileInputStream);
-
-                    new Thread(() -> {
-                        try {
-                            player.play();
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
-                    }).start();
-                    isPlaying = true;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            } else {
-                player.close();
+            if (player == null) {
+                media = new Media(selectedAudioFile.toURI().toString());
+                player = new MediaPlayer(media);
+                player.setOnEndOfMedia(() -> {
+                    player.stop();
+                    playButton.setImage(new Image("images/playButton.png"));
+                    isPlaying = false;
+                });
+                playButton.setImage(new Image("images/pauseButton.png"));
+                player.play();
+                contPL.salvarReproducao(selectedAudioFile, LocalDateTime.now());
+                isPlaying = true;
+                beginTimer();
+            } else if (isPlaying) {
+                player.pause();
+                playButton.setImage(new Image("images/playButton.png"));
                 isPlaying = false;
+            } else {
+                player.play();
+                playButton.setImage(new Image("images/pauseButton.png"));
+                isPlaying = true;
             }
         } else {
-            System.out.println("Nenhum arquivo MP3 selecionado.");
+            System.out.println("A midia não é válida");
         }
     }
 
@@ -220,7 +258,7 @@ public class MainController {
 
     @FXML
     private void inputPlaylistNameTextFieldContent() {
-            playlistNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+        playlistNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             System.out.println("Texto digitado:" + newValue);
         });
     }

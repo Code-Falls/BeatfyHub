@@ -19,6 +19,8 @@ public class MainView extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("fxml/sample.fxml"));
         stage.setScene(new Scene(root));
+        root.prefHeight(700);
+        root.prefWidth(1315);
         stage.setTitle("Beat.fy HUB");
         Image icon = new Image("images/Logo_Reverse.png");
         stage.getIcons().add(icon);

@@ -31,3 +31,8 @@
     -fx-background-color: #8a1cff;
     -fx-background-radius: 10;
 }
+.your-library-button{
+    -fx-background-color: #232323;
+    -fx-background-radius: 10;
+    -fx-text-fill: #fff;
+}

@@ -60,6 +60,10 @@ public class ControladorPlayerLocal {
         }
     }
 
+    public ArrayList<Musica> getMySongs() {
+        return mySongs.getMusicas();
+    }
+
     public Musica procurarMusica(String nome) {
         return mySongs.procurarMusica(nome);
     }

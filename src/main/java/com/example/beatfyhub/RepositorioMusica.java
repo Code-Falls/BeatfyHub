@@ -11,6 +11,11 @@ public class RepositorioMusica implements IRepositorioMusica {
     }
 
     @Override
+    public ArrayList<Musica> getMusicas() {
+        return musicas;
+    }
+
+    @Override
     public void criarMusica(File f){
         Musica m = new Musica(f);
         this.musicas.add(m);
