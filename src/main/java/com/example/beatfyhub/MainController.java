@@ -43,6 +43,7 @@ public class MainController {
     private boolean isPlaying = false;
     private ControladorPlayerLocal contPL = new ControladorPlayerLocal();
 
+
     @FXML
     private Button moreButton, homeButton, newFolderButton, newSongButton, recentButton, ftbButton, likedButton, artistsButton, albumsButton, loginButton, newPlaylistButton, createPlaylistButton, cancelPlaylistButton;
     @FXML

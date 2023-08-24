@@ -7,7 +7,6 @@
 .selected{
     -fx-border-color: #8a1cff;
     -fx-border-width: 0 0 0 5;
-
 }
 .top-border{
     -fx-border-color: #A1A1A1;
