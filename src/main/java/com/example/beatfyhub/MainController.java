@@ -219,6 +219,9 @@ public class MainController {
     @FXML
     private void playMedia() {
         System.out.println("media tocando");
+
+        //selectedAudioFile = contPL.procurarMusica(label.getText()).getMp3();
+
         if (selectedAudioFile != null) {
             if (player == null) {
                 media = new Media(selectedAudioFile.toURI().toString());

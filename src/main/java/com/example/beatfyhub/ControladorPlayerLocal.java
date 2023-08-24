@@ -6,15 +6,27 @@ public class ControladorPlayerLocal {
 
     private IRepositorioMusica mySongs;
     private IRepositorioPlaylist myPlaylists;
+    private IRepositorioReproducaoMusica myHistory;
 
     public ControladorPlayerLocal() {
         this.myPlaylists = new RepositorioPlaylist();
         this.mySongs = new RepositorioMusica();
+        this.myHistory = new RepositorioReproducaoMusica();
     }
 
     public void adicionarMusica(File f) {
         if (f != null) {
             mySongs.criarMusica(f);
+        }
+    }
+
+    public void salvarReproducao(File f, LocalDateTime t){
+        boolean achou = false;
+        for(Musica m: mySongs.getMusicas()){
+            if(m.getMp3().equals(f) && !achou){
+                myHistory.criarReproducao(m, t);
+                achou = true;
+            }
         }
     }
 

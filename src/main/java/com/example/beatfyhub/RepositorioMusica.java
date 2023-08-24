@@ -1,10 +1,15 @@
 package com.example.beatfyhub;
 
-import java.io.File;
+import org.apache.tika.exception.TikaException;
+import org.xml.sax.SAXException;
+
+import java.io.*;
 import java.util.ArrayList;
 
-public class RepositorioMusica implements IRepositorioMusica {
+public class RepositorioMusica implements IRepositorioMusica{
     private ArrayList<Musica> musicas;
+
+
 
     public RepositorioMusica(){
         this.musicas = new ArrayList<>();
@@ -16,16 +21,26 @@ public class RepositorioMusica implements IRepositorioMusica {
     }
 
     @Override
-    public void criarMusica(File f){
-        Musica m = new Musica(f);
-        this.musicas.add(m);
+    public void criarMusica(File f) {
+        try{
+            Musica m = new Musica(f);
+            this.musicas.add(m);
+        }
+        catch(Exception e){
+
+        }
     }
 
     @Override
     public void adicionarPorDiretorio(File[] files){
         for (File f: files){
-            Musica m = new Musica(f);
-            musicas.add(m);
+            try {
+                Musica m = new Musica(f);
+                musicas.add(m);
+            }
+            catch(Exception e){
+
+            }
         }
     }
 
