@@ -40,7 +40,7 @@ public class MainController {
     private MediaPlayer player;
     private File selectedAudioFile;
     private int numMusicLabels = 0;
-    private boolean isPlaying = false;
+    private boolean isPlaying;
     private ControladorPlayerLocal contPL = new ControladorPlayerLocal();
 
 
@@ -59,6 +59,7 @@ public class MainController {
     @FXML
     private ProgressBar musicProgressBar;
     @FXML
+    private int songNumber;
     private Pane musicPane;
     private Media media;
     private MediaPlayer mediaPlayer;

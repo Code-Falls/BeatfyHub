@@ -1,8 +1,12 @@
 package com.example.beatfyhub;
 
-import java.io.File;
+import java.io.*;
+import java.util.ArrayList;
 
-public interface IRepositorioMusica {
+public interface IRepositorioMusica extends Serializable {
+
+    ArrayList<Musica> getMusicas();
+
     void criarMusica(File f);
 
     void adicionarPorDiretorio(File[] files);
