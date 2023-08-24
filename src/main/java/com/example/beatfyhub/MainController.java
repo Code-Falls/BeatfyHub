@@ -99,6 +99,7 @@ public class MainController {
     @FXML
     private void homeButtonClick(ActionEvent event) {
         System.out.println("botão home clicado");
+        contPL.salvar();
     }
 
     @FXML

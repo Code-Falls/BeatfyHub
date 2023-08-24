@@ -3,7 +3,8 @@ package com.example.beatfyhub;
 import java.io.*;
 import java.util.ArrayList;
 
-public interface IRepositorioMusica extends Serializable {
+public interface IRepositorioMusica {
+
 
     ArrayList<Musica> getMusicas();
 
@@ -16,4 +17,6 @@ public interface IRepositorioMusica extends Serializable {
     void listarMusicas();
 
     Musica procurarMusica(String nome);
+
+    void salvarArquivo();
 }

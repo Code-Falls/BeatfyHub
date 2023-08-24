@@ -11,9 +11,9 @@ public class ControladorPlayerLocal {
     private IRepositorioReproducaoMusica myHistory;
 
     public ControladorPlayerLocal() {
-        this.myPlaylists = new RepositorioPlaylist();
-        this.mySongs = new RepositorioMusica();
-        this.myHistory = new RepositorioReproducaoMusica();
+        this.myPlaylists = RepositorioPlaylist.getInstance();
+        this.mySongs = RepositorioMusica.getInstance();
+        this.myHistory = RepositorioReproducaoMusica.getInstance();
     }
 
     public void adicionarMusica(File f) {
@@ -72,6 +72,12 @@ public class ControladorPlayerLocal {
         if (files!=null && files.length>0) {
             mySongs.adicionarPorDiretorio(files);
         }
+    }
+
+    public void salvar(){
+        mySongs.salvarArquivo();
+        myPlaylists.salvarArquivo();
+        myHistory.salvarArquivo();
     }
 
     public ArrayList<Musica> getMySongs() {

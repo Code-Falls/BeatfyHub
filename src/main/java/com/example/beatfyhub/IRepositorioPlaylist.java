@@ -10,4 +10,5 @@ public interface IRepositorioPlaylist {
     void removerMusica(String nomePlaylist, Musica m);
 
     void destruirPlaylist(String nome);
+    void salvarArquivo();
 }

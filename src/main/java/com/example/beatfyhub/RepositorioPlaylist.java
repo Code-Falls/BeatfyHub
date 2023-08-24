@@ -1,14 +1,73 @@
 package com.example.beatfyhub;
 
+import java.io.*;
 import java.util.ArrayList;
 
-public class RepositorioPlaylist implements IRepositorioPlaylist {
+public class RepositorioPlaylist implements IRepositorioPlaylist, Serializable {
 
     private ArrayList<Playlist> playlists;
 
-    public RepositorioPlaylist() {
+    private RepositorioPlaylist() {
         this.playlists = new ArrayList<>();
     }
+
+    private static RepositorioPlaylist instance;
+
+    static RepositorioPlaylist getInstance() {
+        if (RepositorioPlaylist.instance == null) {
+            RepositorioPlaylist.instance = lerDoArquivo();
+        }
+        return RepositorioPlaylist.instance;
+    }
+
+    static RepositorioPlaylist lerDoArquivo() {
+        RepositorioPlaylist instanciaLocal = null;
+
+        File in = new File("playlists.dat");
+        FileInputStream fis = null;
+        ObjectInputStream ois = null;
+        try {
+            fis = new FileInputStream(in);
+            ois = new ObjectInputStream(fis);
+            Object o = ois.readObject();
+            instanciaLocal = (RepositorioPlaylist) o;
+        } catch (Exception e) {
+            instanciaLocal = new RepositorioPlaylist();
+        } finally {
+            if (ois != null) {
+                try {
+                    ois.close();
+                } catch (IOException e) {/* Silent exception */
+                }
+            }
+        }
+        return instanciaLocal;
+    }
+
+    public void salvarArquivo() {
+        if (instance == null) {
+            return;
+        }
+        File out = new File("playlists.dat");
+        FileOutputStream fos = null;
+        ObjectOutputStream oos = null;
+
+        try {
+            fos = new FileOutputStream(out);
+            oos = new ObjectOutputStream(fos);
+            oos.writeObject(instance);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (oos != null) {
+                try {
+                    oos.close();
+                } catch (IOException e) {
+                    /* Silent */}
+            }
+        }
+    }
+
 
     @Override
     public void criarPLaylist(String nome) {
