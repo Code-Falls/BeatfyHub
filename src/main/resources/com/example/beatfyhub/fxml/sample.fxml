@@ -207,18 +207,25 @@
                         <Insets top="6.0" />
                      </padding>
                   </HBox>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="33.0" prefWidth="824.0" />
+                  <HBox alignment="CENTER_RIGHT" prefHeight="33.0" prefWidth="824.0">
+                     <children>
+                        <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveButtonClick" prefHeight="40.0" prefWidth="100.0" styleClass="save-button" stylesheets="@../css/style.css" text="Salvar">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children></HBox>
                </children>
             </HBox>
             <ScrollPane fx:id="musicScrollPane" prefHeight="538.0" prefWidth="988.0">
                <content>
-                  <TableView prefHeight="538.0" prefWidth="978.0">
+                  <TableView fx:id="musicTableView" prefHeight="538.0" prefWidth="978.0">
                     <columns>
-                      <TableColumn prefWidth="57.0" text="Play" />
-                      <TableColumn minWidth="0.0" prefWidth="373.0" text="Name" />
-                        <TableColumn prefWidth="265.0" text="Album" />
-                        <TableColumn prefWidth="230.0" text="Artist" />
-                        <TableColumn prefWidth="50.0" text="Options" />
+                      <TableColumn fx:id="playColumn" prefWidth="57.0" text="Play" />
+                      <TableColumn fx:id="nameColumn" minWidth="0.0" prefWidth="373.0" text="Name" />
+                        <TableColumn fx:id="albumColumn" prefWidth="265.0" text="Album" />
+                        <TableColumn fx:id="artistColumn" prefWidth="230.0" text="Artist" />
+                        <TableColumn fx:id="optionColumn" prefWidth="50.0" text="Options" />
                     </columns>
                   </TableView>
                </content>

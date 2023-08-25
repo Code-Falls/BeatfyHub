@@ -35,3 +35,9 @@
     -fx-background-radius: 10;
     -fx-text-fill: #fff;
 }
+.save-button {
+    -fx-background-color: #598f43;
+    -fx-background-radius: 10;
+    -fx-text-fill: #fff;
+    -fx-font-weight: Bold;
+}

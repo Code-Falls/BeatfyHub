@@ -1,15 +1,18 @@
 package com.example.beatfyhub;
 
+import javafx.scene.control.Button;
 import org.apache.tika.exception.TikaException;
 import org.xml.sax.SAXException;
 
 import java.io.*;
 import java.util.ArrayList;
 
-public class RepositorioMusica implements IRepositorioMusica{
+public class RepositorioMusica implements IRepositorioMusica, Serializable{
     private ArrayList<Musica> musicas;
 
+//singleton
 
+    // instance
 
     public RepositorioMusica(){
         this.musicas = new ArrayList<>();

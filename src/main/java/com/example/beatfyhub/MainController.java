@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -26,50 +27,63 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import javazoom.jl.player.Player;
 import javazoom.jl.player.advanced.AdvancedPlayer;
+import org.apache.tika.exception.TikaException;
+import org.apache.tika.metadata.Metadata;
+import org.xml.sax.SAXException;
+
 import java.net.URL;
 import java.io.FileInputStream;
 import java.time.LocalDateTime;
-import java.util.ResourceBundle;
-import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class MainController {
+
+    @FXML private Button moreButton, homeButton, newFolderButton, newSongButton, recentButton, ftbButton, likedButton, artistsButton, albumsButton, loginButton, newPlaylistButton, createPlaylistButton, cancelPlaylistButton;
+    @FXML private ImageView playButton, previousButton, nextButton, loopButton, shuffleButton, favoriteButton;
+    @FXML private HBox homeContainer, exploreContainer, recentPlayedContainer, newPlaylistContainer, newSongContainer, newFolderContainer;
+    @FXML private TextField playlistNameTextField, searchTextField;
+    @FXML private ScrollPane musicScrollPane;
+    @FXML private ProgressBar musicProgressBar;
+    @FXML private TableView<Musica> musicTableView;
+    @FXML private TableColumn<Musica, String> nameColumn, artistColumn, albumColumn;
+    @FXML private TableColumn<MainController, Button> playColumn, optionColumn;
+
+    private Media media;
+    private MediaPlayer mediaPlayer;
+    private Timer timer;
+    private TimerTask task;
     private MediaPlayer player;
     private File selectedAudioFile;
     private int numMusicLabels = 0;
     private boolean isPlaying;
     private ControladorPlayerLocal contPL = new ControladorPlayerLocal();
 
+    private Button play = new Button("play");
+
+    public void clique() {
+        play.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+               // selectedAudioFile = contPL.procurarMusica(musicList.get(playColumn.get).getNome());
+            }
+        });
+    }
+
+    private static ObservableList<Musica> musicList;
 
     @FXML
-    private Button moreButton, homeButton, newFolderButton, newSongButton, recentButton, ftbButton, likedButton, artistsButton, albumsButton, loginButton, newPlaylistButton, createPlaylistButton, cancelPlaylistButton;
-    @FXML
-    private ImageView playButton, previousButton, nextButton, loopButton, shuffleButton, favoriteButton;
-    @FXML
-    private HBox homeContainer, exploreContainer, recentPlayedContainer, newPlaylistContainer, newSongContainer, newFolderContainer;
-    @FXML
-    private TextField playlistNameTextField, searchTextField;
-    @FXML
-    private GridPane musicGridPane;
-    @FXML
-    private ScrollPane musicScrollPane;
-    @FXML
-    private ProgressBar musicProgressBar;
-    @FXML
-    private int songNumber;
-    private Pane musicPane;
-    private Media media;
-    private MediaPlayer mediaPlayer;
-    private Timer timer;
-    private TimerTask task;
-
-//    public void initialize (URL url, ResourceBundle resourceBundle) {
-//        media = new Media(contPL.getMySongs().get(songNumber).getMp3().toURI().toString());
-//        player = new MediaPlayer(media);
-//    }
+    private void initialize() {
+        PropertyValueFactory<MainController, Button> botao = new PropertyValueFactory("play");
+        playColumn.setCellValueFactory(botao);
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        artistColumn.setCellValueFactory(new PropertyValueFactory<>("artista"));
+        albumColumn.setCellValueFactory(new PropertyValueFactory<>("album"));
+        optionColumn.setCellValueFactory(new PropertyValueFactory<>("options"));
+        clique();
+    }
 
     public void beginTimer () {
         timer = new Timer();
@@ -102,12 +116,18 @@ public class MainController {
     }
 
     @FXML
-    private void newSongButtonClick(ActionEvent event) {
+    private void newSongButtonClick(ActionEvent event) throws TikaException, IOException, SAXException {
+
         System.out.println("botão explore clicado");
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arquivos MP3", "*.mp3"));
         selectedAudioFile = fileChooser.showOpenDialog(newSongButton.getScene().getWindow());
-        contPL.adicionarMusica(selectedAudioFile);
+        contPL.adicionarMusica(selectedAudioFile, play);
+
+
+        musicList.addAll(contPL.getMySongs());
+        musicTableView.setItems(musicList);
+
         if (selectedAudioFile != null) {
             System.out.println("Arquivo MP3 selecionado: " + selectedAudioFile.getName());
             if (player != null) {
@@ -116,7 +136,6 @@ public class MainController {
             isPlaying = false;
         }
     }
-
 
     @FXML
     private void newFolderButtonClick(){
@@ -127,23 +146,7 @@ public class MainController {
             File[] musicFiles = selectedFolder.listFiles((dir, name) -> name.toLowerCase().endsWith(".mp3"));
             if (musicFiles != null) {
                 for (File musicFile : musicFiles) {
-                    contPL.adicionarMusica(musicFile);
-
-                    Label musicLabel = new Label(musicFile.getName());
-                    int column = numMusicLabels % 3;
-                    int row = numMusicLabels / 3;
-
-                    if (row > musicGridPane.getRowCount()) {
-                        musicGridPane.addColumn(column);
-                    }
-
-                    musicGridPane.add(musicLabel, column, row);
-                    musicLabel.setPrefHeight(30);
-                    numMusicLabels++;
-
-                    double newHeight = musicScrollPane.getPrefHeight() + 30;
-                    musicScrollPane.setPrefHeight(newHeight);
-                    musicPane.setPrefHeight(newHeight);
+                    contPL.adicionarMusica(musicFile, play);
                 }
             }
         }
@@ -259,6 +262,11 @@ public class MainController {
     @FXML
     private void loopMedia() {
         System.out.println("modo loop");
+    }
+
+    @FXML
+    private void saveButtonClick() {
+        System.out.println("Arquivos Salvos");
     }
 
     @FXML

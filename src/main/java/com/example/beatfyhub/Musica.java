@@ -5,14 +5,17 @@ import java.time.LocalDate;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import javafx.beans.property.StringProperty;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.parser.AutoDetectParser;
 import org.apache.tika.parser.ParseContext;
 import org.apache.tika.parser.Parser;
 import org.apache.tika.sax.BodyContentHandler;
-
-import org.xml.sax.SAXException;
 
 public class Musica {
 
@@ -47,6 +50,7 @@ public class Musica {
         }
     }
 
+
     public String getNome() {
         return nome;
     }
@@ -58,5 +62,41 @@ public class Musica {
 
     public File getMp3() {
         return mp3;
+    }
+
+    public int getDuracao() {
+        return duracao;
+    }
+
+    public String getArtista() {
+        return artista;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public LocalDate getAnoLancamento() {
+        return anoLancamento;
+    }
+
+    public Boolean getFavorita() {
+        return favorita;
+    }
+
+    public String getAlbum() {
+        return album;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public Button getPlay() {
+        return play;
+    }
+
+    public Button getOptions() {
+        return options;
     }
 }
