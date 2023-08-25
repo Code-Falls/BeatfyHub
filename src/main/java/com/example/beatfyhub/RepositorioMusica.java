@@ -24,9 +24,9 @@ public class RepositorioMusica implements IRepositorioMusica, Serializable{
     }
 
     @Override
-    public void criarMusica(File f) {
+    public void criarMusica(File f, Button btn) {
         try{
-            Musica m = new Musica(f);
+            Musica m = new Musica(f, btn);
             this.musicas.add(m);
         }
         catch(Exception e){
@@ -35,10 +35,10 @@ public class RepositorioMusica implements IRepositorioMusica, Serializable{
     }
 
     @Override
-    public void adicionarPorDiretorio(File[] files){
+    public void adicionarPorDiretorio(File[] files, Button btn){
         for (File f: files){
             try {
-                Musica m = new Musica(f);
+                Musica m = new Musica(f, btn);
                 musicas.add(m);
             }
             catch(Exception e){

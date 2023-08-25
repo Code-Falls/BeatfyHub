@@ -28,11 +28,15 @@ public class Musica {
     private String album;
     private String path;
     private File mp3;
+    private Button play;
+    private Button options;
 
-    public Musica(File mp) throws IOException, TikaException,  org.xml.sax.SAXException{
+    public Musica(File mp, Button btn) throws IOException, TikaException,  org.xml.sax.SAXException {
         this.nome = mp.getName();
         this.mp3 = mp;
         this.path = mp.getAbsolutePath();
+        this.play = btn;
+        this.options = new Button("Opt");
 
         Parser parser = new AutoDetectParser();
         BodyContentHandler handler = new BodyContentHandler();
@@ -45,7 +49,7 @@ public class Musica {
 
         String[] metadataNames = metadata.names();
 
-        for(String name : metadataNames) {
+        for (String name : metadataNames) {
             System.out.println(name + ": " + metadata.get(name));
         }
     }

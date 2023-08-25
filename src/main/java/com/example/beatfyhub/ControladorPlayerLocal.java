@@ -1,8 +1,11 @@
 package com.example.beatfyhub;
 
+import javafx.scene.control.Button;
+
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.io.*;
 
 public class ControladorPlayerLocal {
 
@@ -10,15 +13,16 @@ public class ControladorPlayerLocal {
     private IRepositorioPlaylist myPlaylists;
     private IRepositorioReproducaoMusica myHistory;
 
+
     public ControladorPlayerLocal() {
         this.myPlaylists = new RepositorioPlaylist();
         this.mySongs = new RepositorioMusica();
         this.myHistory = new RepositorioReproducaoMusica();
     }
 
-    public void adicionarMusica(File f) {
+    public void adicionarMusica(File f, Button b) {
         if (f != null) {
-            mySongs.criarMusica(f);
+            mySongs.criarMusica(f, b);
         }
     }
 
@@ -66,11 +70,11 @@ public class ControladorPlayerLocal {
         myPlaylists.removerMusica(nomePlaylist, mySongs.procurarMusica(nomeMusica));
     }
 
-    public void adicionarMusicasDaPasta(String caminho){
+    public void adicionarMusicasDaPasta(String caminho, Button b){
         File diretorio = new File(caminho);
         File[] files = diretorio.listFiles();
         if (files!=null && files.length>0) {
-            mySongs.adicionarPorDiretorio(files);
+            mySongs.adicionarPorDiretorio(files, b);
         }
     }
 

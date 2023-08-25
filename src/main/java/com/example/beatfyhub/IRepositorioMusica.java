@@ -8,9 +8,9 @@ public interface IRepositorioMusica extends Serializable {
 
     ArrayList<Musica> getMusicas();
 
-    void criarMusica(File f);
+    void criarMusica(File f, Button btn);
 
-    void adicionarPorDiretorio(File[] files);
+    void adicionarPorDiretorio(File[] files, Button btn);
 
     void destruirMusica(String nome);
 
