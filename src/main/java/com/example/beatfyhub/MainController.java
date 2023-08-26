@@ -58,31 +58,32 @@ public class MainController {
     private MediaPlayer player;
     private File selectedAudioFile;
     private int numMusicLabels = 0;
+    private ArrayList<File> songs;
     private boolean isPlaying;
     private ControladorPlayerLocal contPL = new ControladorPlayerLocal();
 
     private Button play = new Button("play");
 
-    public void clique() {
-        play.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-               // selectedAudioFile = contPL.procurarMusica(musicList.get(playColumn.get).getNome());
-            }
-        });
-    }
+//    public void clique() {
+//        play.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//            }
+//        });
+//
 
     private static ObservableList<Musica> musicList;
 
     @FXML
     private void initialize() {
-        PropertyValueFactory<MainController, Button> botao = new PropertyValueFactory("play");
-        playColumn.setCellValueFactory(botao);
+        PropertyValueFactory<MainController, Button> play = new PropertyValueFactory<>("play");
+        PropertyValueFactory<MainController, Button> options = new PropertyValueFactory<>("options");
+        playColumn.setCellValueFactory(play);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
         artistColumn.setCellValueFactory(new PropertyValueFactory<>("artista"));
         albumColumn.setCellValueFactory(new PropertyValueFactory<>("album"));
-        optionColumn.setCellValueFactory(new PropertyValueFactory<>("options"));
-        clique();
+        optionColumn.setCellValueFactory(options);
+        //clique();
     }
 
     public void beginTimer () {
@@ -94,7 +95,7 @@ public class MainController {
                 isPlaying = true;
                 double current = mediaPlayer.getCurrentTime().toSeconds();
                 double end = media.getDuration().toSeconds();
-                System.out.println(current/end); //only needed to see the progress value in the console
+                System.out.println(current/end);
                 musicProgressBar.setProgress(current/end);
 
                 if (current/end == 1) {
@@ -123,7 +124,7 @@ public class MainController {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arquivos MP3", "*.mp3"));
         selectedAudioFile = fileChooser.showOpenDialog(newSongButton.getScene().getWindow());
         contPL.adicionarMusica(selectedAudioFile, play);
-
+        ObservableList<Musica> musicList = FXCollections.observableArrayList();
 
         musicList.addAll(contPL.getMySongs());
         musicTableView.setItems(musicList);
@@ -206,7 +207,9 @@ public class MainController {
     @FXML
     private void favoriteMedia() {
         System.out.println("media favoritada");
-        favoriteButton.setImage(new Image("images/fullLikedButton.png"));
+//        favoriteButton.setImage(new Image("images/fullLikedButton.png"));
+        contPL.adicionarMusica(selectedAudioFile, play);
+
     }
 
     @FXML

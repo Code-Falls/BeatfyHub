@@ -302,7 +302,7 @@
                         <Insets top="-20.0" />
                      </padding>
                   </HBox>
-                  <HBox>
+                  <HBox fx:id="songProgressBar">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
