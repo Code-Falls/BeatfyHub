@@ -109,4 +109,16 @@ public class RepositorioPlaylist implements IRepositorioPlaylist {
         }
     }
 
+    public Playlist procurarPlaylist(String nome){
+        for(Playlist p: playlists){
+            if(p.getNome().equals(nome)){
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Playlist> getPlaylists() {
+        return playlists;
+    }
 }

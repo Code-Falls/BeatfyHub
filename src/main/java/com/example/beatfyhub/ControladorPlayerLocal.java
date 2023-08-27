@@ -26,6 +26,10 @@ public class ControladorPlayerLocal {
         }
     }
 
+    public ArrayList<Playlist> getMyPlaylists() {
+        return myPlaylists.getPlaylists();
+    }
+
     public void salvarReproducao(File f, LocalDateTime t){
         boolean achou = false;
         for(Musica m: mySongs.getMusicas()){
@@ -39,6 +43,15 @@ public class ControladorPlayerLocal {
     public void removerMusica(String nome) {
         if (nome != null) {
             mySongs.destruirMusica(nome);
+        }
+    }
+
+    public Playlist procurarPlaylist(String nome){
+        if(!nome.isBlank() && !nome.isEmpty()) {
+            return myPlaylists.procurarPlaylist(nome);
+        }
+        else{
+            return null;
         }
     }
 

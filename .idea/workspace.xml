@@ -6,14 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="467917b0-d825-4d0b-8bc3-42c0ec50935e" name="Changes" comment="Table View &quot;Funcional&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/ControladorPlayerLocal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/ControladorPlayerLocal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/IRepositorioPlaylist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/IRepositorioPlaylist.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainController.java" afterDir="false" />
-    </list>
-    <list id="5214c802-0a84-4f95-a03f-cb9d871cc016" name="Changes by gabriel" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/beatfyhub/fxml/main-scene.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/Playlist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/Playlist.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/RepositorioPlaylist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/RepositorioPlaylist.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/beatfyhub/fxml/new-playlist.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/beatfyhub/fxml/new-playlist.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/beatfyhub/fxml/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/beatfyhub/fxml/sample.fxml" afterDir="false" />
     </list>
-    <list id="00dc1061-2c13-4bd2-b86c-105fef0a0ab5" name="Changes by Marcela" comment="" />
+    <list id="5214c802-0a84-4f95-a03f-cb9d871cc016" name="Changes by gabriel" comment="Changes by gabriel">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainController.java" afterDir="false" />
+    </list>
     <list id="08dd8dce-126b-4be4-9ed1-109177848eb6" name="Changes by nichc" comment="code with me" />
     <list id="85072bb1-2d5b-4d84-98ef-2aaec057692c" name="Changes by nykdos" comment="Changes by nykdos" />
     <list id="7b9db792-d82a-4637-b8c0-44b9a893c555" name="Changes by Pichau" comment="" />
@@ -56,14 +59,23 @@
   <component name="LineStatusTrackerManager">
     <file path="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainController.java">
       <ranges>
-        <range start1="4" end1="4" start2="4" end2="6" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="55" end1="55" start2="57" end2="58" changelist="5214c802-0a84-4f95-a03f-cb9d871cc016" />
-        <range start1="80" end1="81" start2="83" end2="83" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="146" end1="147" start2="148" end2="149" changelist="5214c802-0a84-4f95-a03f-cb9d871cc016" />
-        <range start1="155" end1="155" start2="157" end2="164" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="164" end1="165" start2="173" end2="174" changelist="5214c802-0a84-4f95-a03f-cb9d871cc016" />
-        <range start1="310" end1="310" start2="319" end2="320" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="497" end1="497" start2="507" end2="508" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="45" end1="46" start2="45" end2="46" changelist="5214c802-0a84-4f95-a03f-cb9d871cc016" />
+        <range start1="50" end1="51" start2="50" end2="54" changelist="5214c802-0a84-4f95-a03f-cb9d871cc016" />
+        <range start1="52" end1="53" start2="55" end2="56" changelist="5214c802-0a84-4f95-a03f-cb9d871cc016" />
+        <range start1="57" end1="58" start2="60" end2="68" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="70" end1="70" start2="80" end2="114" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="71" end1="71" start2="115" end2="123" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="82" end1="86" start2="134" end2="140" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="145" end1="146" start2="199" end2="200" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="148" end1="151" start2="202" end2="202" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="157" end1="157" start2="208" end2="213" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="193" end1="194" start2="249" end2="251" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="224" end1="226" start2="281" end2="286" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="229" end1="229" start2="289" end2="291" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="310" end1="344" start2="372" end2="372" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="347" end1="348" start2="375" end2="381" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="497" end1="497" start2="530" end2="572" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="508" end1="508" start2="583" end2="585" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
       </ranges>
     </file>
   </component>
@@ -95,7 +107,7 @@
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "git-widget-placeholder": "Teste-GabrielC",
     "jdk.selected.JAVA_MODULE": "20",
-    "last_opened_file_path": "C:/Users/nichc/Desktop/BeatfyHub",
+    "last_opened_file_path": "C:/Users/nichc/AppData/Local/SceneBuilder/SceneBuilder.exe",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -135,7 +147,7 @@
       <option name="presentableId" value="Default" />
       <updated>1691281416646</updated>
       <workItem from="1693092211229" duration="11305000" />
-      <workItem from="1693104116759" duration="2497000" />
+      <workItem from="1693104116759" duration="8803000" />
     </task>
     <task id="LOCAL-00001" summary="tentativa de criar uma classe midia">
       <option name="closed" value="true" />
@@ -313,7 +325,23 @@
       <option name="project" value="LOCAL" />
       <updated>1693104275287</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Table View &quot;Funcional&quot;">
+      <option name="closed" value="true" />
+      <created>1693106730513</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1693106730513</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Changes by gabriel">
+      <option name="closed" value="true" />
+      <created>1693106754634</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1693106754634</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -349,6 +377,7 @@
     <MESSAGE value="Changes by nykdos" />
     <MESSAGE value="code with me" />
     <MESSAGE value="Table View &quot;Funcional&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Table View &quot;Funcional&quot;" />
+    <MESSAGE value="Changes by gabriel" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes by gabriel" />
   </component>
 </project>

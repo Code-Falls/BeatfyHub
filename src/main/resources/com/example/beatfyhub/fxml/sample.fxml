@@ -154,7 +154,16 @@
                   </VBox>
                   <ScrollPane prefHeight="222.0" prefWidth="311.0" style="-fx-background-color: trasnparent;">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="616.0" prefWidth="292.0" styleClass="secondary-color" stylesheets="@../css/style.css" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="616.0" prefWidth="292.0" styleClass="secondary-color" stylesheets="@../css/style.css">
+                           <children>
+                              <TableView fx:id="playlistTableView" layoutX="-1.0" prefHeight="385.0" prefWidth="294.0" style="-fx-background-color: transparent;">
+                                <columns>
+                                    <TableColumn fx:id="playPlaylistButton" prefWidth="43.0" />
+                                  <TableColumn fx:id="nomePlaylistColumn" prefWidth="204.0" />
+                                  <TableColumn fx:id="removePlaylistColumn" prefWidth="118.0" />
+                                </columns>
+                              </TableView>
+                           </children></AnchorPane>
                     </content>
                   </ScrollPane>
                </children>
@@ -219,11 +228,11 @@
             </HBox>
             <ScrollPane fx:id="musicScrollPane" prefHeight="538.0" prefWidth="988.0">
                <content>
-                  <TableView fx:id="musicTableView" prefHeight="538.0" prefWidth="978.0">
+                  <TableView fx:id="musicTableView" prefHeight="538.0" prefWidth="978.0" style="-fx-background-color: transparent;">
                     <columns>
-                      <TableColumn fx:id="playColumn" prefWidth="57.0" text="Play" />
-                      <TableColumn fx:id="nameColumn" minWidth="0.0" prefWidth="373.0" text="Name" />
-                        <TableColumn fx:id="albumColumn" prefWidth="265.0" text="Album" />
+                      <TableColumn fx:id="playColumn" prefWidth="57.0" />
+                      <TableColumn fx:id="nameColumn" minWidth="0.0" prefWidth="373.0" style="-fx-background-color: transparent;" />
+                        <TableColumn fx:id="albumColumn" prefWidth="265.0" />
                         <TableColumn fx:id="artistColumn" prefWidth="230.0" text="Artist" />
                         <TableColumn fx:id="optionColumn" prefWidth="50.0" text="Options" />
                     </columns>
@@ -335,7 +344,7 @@
                         <Image url="@../../../../images/volumeDown.png" />
                      </image>
                   </ImageView>
-                  <Slider fx:id="volumeSlider" prefHeight="16.0" prefWidth="108.0" stylesheets="@../css/slider.css" />
+                  <Slider fx:id="volumeSlider" prefHeight="16.0" prefWidth="108.0" stylesheets="@../css/slider.css" value="20.0" />
                </children>
             </HBox>
          </children>

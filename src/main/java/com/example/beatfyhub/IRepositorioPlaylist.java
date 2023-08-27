@@ -1,5 +1,7 @@
 package com.example.beatfyhub;
 
+import java.util.ArrayList;
+
 public interface IRepositorioPlaylist {
     void criarPLaylist(String nome);
 
@@ -11,4 +13,6 @@ public interface IRepositorioPlaylist {
 
     void destruirPlaylist(String nome);
     void salvarArquivo();
+    Playlist procurarPlaylist(String nome);
+    ArrayList<Playlist> getPlaylists();
 }

@@ -55,7 +55,14 @@ public class MainController {
     @FXML private TableColumn<Musica, String> nameColumn = new TableColumn<>("Nome");
     @FXML private TableColumn<Musica, String> albumColumn = new TableColumn<>("Album");
     @FXML private TableColumn<Musica, String> artistColumn = new TableColumn<>("Artista");
-    @FXML private Slider volumeSlider;
+    //===================================//
+
+    //=========TabelaPlaylists===========//
+    @FXML private TableView<Playlist> playlistTableView = new TableView<>();
+    @FXML private TableColumn<Playlist, Void> playPlaylistButton = new TableColumn<>();
+    @FXML private TableColumn<Playlist, String> nomePlaylistColumn = new TableColumn<>("nome");
+    @FXML private TableColumn<Playlist, Void> removePlaylistColumn = new TableColumn<>();
+    //===================================//
     private Media media;
     private MediaPlayer mediaPlayer;
     private Timer timer;
@@ -68,7 +75,49 @@ public class MainController {
     private ControladorPlayerLocal contPL = new ControladorPlayerLocal();
     private File musicaTocando;
     private ObservableList<Musica> musicList = FXCollections.observableArrayList();
+    private ObservableList<Playlist> playlistList = FXCollections.observableArrayList();
 
+
+    //adicionar botoes tabela playlist
+
+    private void addButtonToTablePlaylist(){
+        Callback<TableColumn<Playlist, Void>, TableCell<Playlist, Void>> cellFactory = new Callback<TableColumn<Playlist, Void>, TableCell<Playlist, Void>>() {
+            @Override
+            public TableCell<Playlist, Void> call(final TableColumn<Playlist, Void> param) {
+                final TableCell<Playlist, Void> cell = new TableCell<Playlist, Void>() {
+
+                    private final Button btn = new Button("Play");
+
+                    {
+                        btn.setOnAction((ActionEvent event) -> {
+                            Playlist p = getTableView().getItems().get(getIndex());
+                            musicList.removeAll();
+                            musicList.addAll(p.getPlaylist());
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        playPlaylistButton.setCellFactory(cellFactory);
+
+    }
+
+    //============================================================
+
+
+    //=============Adicionar botoes tabela principal====================
     private void addButtonToTable(){
         Callback<TableColumn<Musica, Void>, TableCell<Musica, Void>> cellFactory = new Callback<TableColumn<Musica, Void>, TableCell<Musica, Void>>() {
             @Override
@@ -80,10 +129,12 @@ public class MainController {
                     {
                         btn.setOnAction((ActionEvent event) -> {
                             Musica m = getTableView().getItems().get(getIndex());
-                            selectedAudioFile = m.getMp3();
-                            media = new Media(selectedAudioFile.toURI().toString());
-                            player = new MediaPlayer(media);
-                            playMedia();
+                            if(isPlaying){
+                                player.stop();
+                            }
+                            definirMusicaaTocar(m);
+                            songLabel.setText(m.getNome().replace(".mp3", ""));
+                            tocarMusicaSelecionada();
                         });
                     }
 
@@ -143,18 +194,20 @@ public class MainController {
 
     }
 
-
+//========================================================
     @FXML
     private void initialize() {
-        System.out.println("aqui");
-        contPL.listarMusicas();
-
         musicList.addAll(contPL.getMySongs());
         addButtonToTable();
         addButtonEraseToTable();
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
         artistColumn.setCellValueFactory(new PropertyValueFactory<>("artista"));
         albumColumn.setCellValueFactory(new PropertyValueFactory<>("album"));
+
+        //Tabela de Playlist
+        nomePlaylistColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        //=============
+
         musicProgressBar.setStyle("-fx-accent: #8a1cff");
         volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -191,7 +244,8 @@ public class MainController {
 
     @FXML
     private void homeButtonClick(ActionEvent event) {
-        System.out.println("botão home clicado");
+        musicList.addAll(contPL.getMySongs());
+        musicTableView.setItems(musicList);
     }
 
     @FXML
@@ -222,11 +276,16 @@ public class MainController {
         if (selectedFolder != null) {
             File[] musicFiles = selectedFolder.listFiles((dir, name) -> name.toLowerCase().endsWith(".mp3"));
             if (musicFiles != null) {
-                for (File musicFile : musicFiles) {
-                    contPL.adicionarMusica(musicFile);
+                for (File mf : musicFiles) {
+                    contPL.adicionarMusica(mf);
+                    if(!(musicList.contains(contPL.procurarMusica(mf.getName())))){
+                        musicList.add(contPL.procurarMusica(mf.getName()));
+                    }
                 }
             }
         }
+        musicTableView.setItems(musicList);
+
     }
 
     @FXML
@@ -308,44 +367,15 @@ public class MainController {
         System.out.println("media anterior");
     }
 
-    public void tocar(){
-        System.out.println("media tocando");
-
-        musicaTocando = selectedAudioFile;
-
-        if (musicaTocando != null) {
-            if (player == null) {
-                media = new Media(musicaTocando.toURI().toString());
-                player = new MediaPlayer(media);
-                
-                player.setOnEndOfMedia(() -> {
-                    player.stop();
-                    playButton.setImage(new Image("images/playButton.png"));
-                    isPlaying = false;
-                });
-                playButton.setImage(new Image("images/pauseButton.png"));
-                player.play();
-                contPL.salvarReproducao(musicaTocando, LocalDateTime.now());
-                isPlaying = true;
-                beginTimer();
-            } else if (isPlaying) {
-                player.pause();
-                playButton.setImage(new Image("images/playButton.png"));
-                isPlaying = false;
-            } else {
-                player.play();
-                playButton.setImage(new Image("images/pauseButton.png"));
-                isPlaying = true;
-            }
-        } else {
-            System.out.println("A midia não é válida");
-        }
-    }
-
 
     @FXML
     private void playMedia() {
-        tocar();
+        if(isPlaying){
+            pausarMusica();
+        }
+        else{
+            resumirMusica();
+        }
     }
 
     @FXML
@@ -496,6 +526,48 @@ public class MainController {
         applyColorAnimationSideBar(recentPlayedContainer);
     }
 
+
+
+    // ===============FUNCOES PLAYER=======================
+
+    public void definirMusicaaTocar(Musica m){
+        if (m != null) {
+            musicaTocando = m.getMp3();
+        }
+
+    }
+
+    public void tocarMusicaSelecionada(){
+        if(musicaTocando!=null){
+            media = new Media(musicaTocando.toURI().toString());
+            player = new MediaPlayer(media);
+            player.setOnEndOfMedia(() -> {
+                player.stop();
+                playButton.setImage(new Image("images/playButton.png"));
+                isPlaying = false;
+            });
+            playButton.setImage(new Image("images/pauseButton.png"));
+            player.play();
+            contPL.salvarReproducao(musicaTocando, LocalDateTime.now());
+            isPlaying = true;
+            beginTimer();
+        }
+    }
+
+    public void pausarMusica(){
+        player.pause();
+        playButton.setImage(new Image("images/playButton.png"));
+        isPlaying = false;
+    }
+
+    public void resumirMusica(){
+        player.play();
+        playButton.setImage(new Image("images/pauseButton.png"));
+        isPlaying = true;
+    }
+
+    //=====================================================
+
 // #####################################################################################################
 // ----------------------------------NEW-PLAYLIST PAGE--------------------------------------------------
 // #####################################################################################################
@@ -506,6 +578,8 @@ public class MainController {
         String playlistName = playlistNameTextField.getText();
         System.out.println("Nome da playlist: " + playlistName);
         contPL.criarPLaylist(playlistName);
+        playlistList.addAll(contPL.getMyPlaylists());
+        playlistTableView.setItems(playlistList);
         Stage stage = (Stage) createPlaylistButton.getScene().getWindow();
         stage.close();
     }

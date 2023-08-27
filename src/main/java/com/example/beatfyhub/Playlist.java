@@ -29,4 +29,8 @@ public class Playlist {
     public String getNome() {
         return nome;
     }
+
+    public ArrayList<Musica> getPlaylist() {
+        return playlist;
+    }
 }
