@@ -2,6 +2,8 @@ package com.example.beatfyhub;
 
 import com.example.beatfyhub.ControladorPlayerLocal;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -78,7 +80,6 @@ public class MainController {
                         btn.setOnAction((ActionEvent event) -> {
                             Musica m = getTableView().getItems().get(getIndex());
                             selectedAudioFile = m.getMp3();
-                            //player.stop();
                             media = new Media(selectedAudioFile.toURI().toString());
                             player = new MediaPlayer(media);
                             playMedia();
@@ -153,6 +154,13 @@ System.out.println("aqui");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
         artistColumn.setCellValueFactory(new PropertyValueFactory<>("artista"));
         albumColumn.setCellValueFactory(new PropertyValueFactory<>("album"));
+        musicProgressBar.setStyle("-fx-accent: #8a1cff");
+        volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                player.setVolume(volumeSlider.getValue() * 0.01);
+            }
+        });
     }
 
     public void beginTimer () {
@@ -308,6 +316,7 @@ System.out.println("aqui");
             if (player == null) {
                 media = new Media(musicaTocando.toURI().toString());
                 player = new MediaPlayer(media);
+                
                 player.setOnEndOfMedia(() -> {
                     player.stop();
                     playButton.setImage(new Image("images/playButton.png"));
@@ -495,6 +504,7 @@ System.out.println("aqui");
         System.out.println("Playlist criada");
         String playlistName = playlistNameTextField.getText();
         System.out.println("Nome da playlist: " + playlistName);
+        contPL.criarPLaylist(playlistName);
         Stage stage = (Stage) createPlaylistButton.getScene().getWindow();
         stage.close();
     }
