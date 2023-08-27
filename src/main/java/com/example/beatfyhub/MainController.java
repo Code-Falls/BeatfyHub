@@ -34,6 +34,10 @@ import javazoom.jl.player.Player;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
+import org.jaudiotagger.audio.AudioFile;
+import org.jaudiotagger.audio.AudioFileIO;
+import org.jaudiotagger.tag.FieldKey;
+import org.jaudiotagger.tag.Tag;
 import org.xml.sax.SAXException;
 
 import java.net.URL;
@@ -50,7 +54,7 @@ public class MainController {
     @FXML private ScrollPane musicScrollPane;
     @FXML private ProgressBar musicProgressBar = new ProgressBar();
     @FXML private Slider volumeSlider = new Slider();
-    @FXML private Label songLabel;
+    @FXML private Label songLabel, artistLabel;
     //========TabelaPrincipal============//
     @FXML private TableView<Musica> musicTableView = new TableView<>();
     @FXML private TableColumn<Musica, Void> playColumn = new TableColumn<>("Play");
@@ -344,16 +348,35 @@ public class MainController {
     }
 
     @FXML
-    private void newSongButtonClick(ActionEvent event) throws TikaException, IOException, SAXException {
+    private void newSongButtonClick(ActionEvent event){
         System.out.println("botão explore clicado");
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arquivos MP3", "*.mp3"));
         selectedAudioFile = fileChooser.showOpenDialog(newSongButton.getScene().getWindow());
         contPL.adicionarMusica(selectedAudioFile);
         musicList.add(contPL.procurarMusica(selectedAudioFile.getName()));
-        selectedAudioFile = null;
+//        selectedAudioFile = null;
         musicTableView.setItems(musicList);
         initialize();
+    }
+    //toDO Arrumar um local para colocar, ele está funcionando, mas não sei onde chamar a funçaõ
+    //toDo por enquanto ele está no last Played
+    public void metadataCatcher(){
+        File mp3File = selectedAudioFile;
+
+        try {
+            AudioFile audioFile = AudioFileIO.read(mp3File);
+            Tag tag = audioFile.getTag();
+
+            String artist = tag.getFirst(FieldKey.ARTIST);
+            String title = tag.getFirst(FieldKey.TITLE);
+
+            songLabel.setText(title);
+            artistLabel.setText(artist);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -380,6 +403,7 @@ public class MainController {
     @FXML
     private void recentButtonClick(ActionEvent event) {
         System.out.println("botão recent played clicado");
+        metadataCatcher();
     }
 
     @FXML
@@ -412,13 +436,6 @@ public class MainController {
         System.out.println("aqui"+playlistList);
         System.out.println("kivbads"+playlistTableView);
     }
-
-    @FXML
-    private void loginButtonClick(ActionEvent event) {
-        System.out.println("botão login spotify clicado");
-    }
-
-
 
     @FXML
     private void newPlaylistButtonClick(ActionEvent event) {
@@ -649,20 +666,20 @@ public class MainController {
     }
 
     public void tocarMusicaSelecionada(){
-//        if(musicaTocando!=null){
-//            media = new Media(musicaTocando.toURI().toString());
-//            player = new MediaPlayer(media);
-//            player.setOnEndOfMedia(() -> {
-//                player.stop();
-//                playButton.setImage(new Image("images/playButton.png"));
-//                isPlaying = false;
-//            });
-//            playButton.setImage(new Image("images/pauseButton.png"));
-//            player.play();
-//            contPL.salvarReproducao(musicaTocando, LocalDateTime.now());
-//            isPlaying = true;
-//            beginTimer();
-//        }
+        if(musicaTocando!=null){
+            media = new Media(musicaTocando.toURI().toString());
+            player = new MediaPlayer(media);
+            player.setOnEndOfMedia(() -> {
+                player.stop();
+                playButton.setImage(new Image("images/playButton.png"));
+                isPlaying = false;
+            });
+            playButton.setImage(new Image("images/pauseButton.png"));
+            player.play();
+            contPL.salvarReproducao(musicaTocando, LocalDateTime.now());
+            isPlaying = true;
+            beginTimer();
+        }
         media = new Media(playlistTocarInteira.get(songNumber).getMp3().toURI().toString());
         player = new MediaPlayer(media);
         songLabel.setText(playlistTocarInteira.get(songNumber).getNome());

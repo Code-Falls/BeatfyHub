@@ -260,7 +260,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="242.0" text="Music Artist" textFill="#a869eb">
+                        <Label fx:id="artistLabel" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="242.0" text="Music Artist" textFill="#a869eb">
                            <font>
                               <Font size="18.0" />
                            </font>
