@@ -43,14 +43,17 @@ import java.util.*;
 
 public class MainController {
 
-    @FXML private Button moreButton, homeButton, newFolderButton, newSongButton, recentButton, ftbButton, likedButton, artistsButton, albumsButton, loginButton, newPlaylistButton, createPlaylistButton, cancelPlaylistButton;
+    @FXML private Button homeButton, newFolderButton, newSongButton, recentButton, likedButton, artistsButton, albumsButton, newPlaylistButton, createPlaylistButton, cancelPlaylistButton;
     @FXML private ImageView playButton, previousButton, nextButton, loopButton, shuffleButton, favoriteButton;
     @FXML private HBox homeContainer, exploreContainer, recentPlayedContainer, newPlaylistContainer, newSongContainer, newFolderContainer;
     @FXML private TextField playlistNameTextField, searchTextField;
     @FXML private ScrollPane musicScrollPane;
-    @FXML private ProgressBar musicProgressBar;
+    @FXML private ProgressBar musicProgressBar = new ProgressBar();
+    @FXML private Slider volumeSlider = new Slider();
+    @FXML private Label songLabel;
+    //========TabelaPrincipal============//
     @FXML private TableView<Musica> musicTableView = new TableView<>();
-    @FXML TableColumn<Musica, Void> playColumn = new TableColumn<>("Play");
+    @FXML private TableColumn<Musica, Void> playColumn = new TableColumn<>("Play");
     @FXML private TableColumn<Musica, Void> optionColumn = new TableColumn<>("Options");
     @FXML private TableColumn<Musica, String> nameColumn = new TableColumn<>("Nome");
     @FXML private TableColumn<Musica, String> albumColumn = new TableColumn<>("Album");
