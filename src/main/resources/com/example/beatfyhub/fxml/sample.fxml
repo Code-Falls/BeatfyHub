@@ -142,9 +142,9 @@
                         </HBox>
                         <HBox prefHeight="27.0" prefWidth="303.0" spacing="10.0">
                            <children>
-                              <Button fx:id="playlistButton" mnemonicParsing="false" onAction="#playlistsButtonClick" styleClass="your-library-button" stylesheets="@../css/style.css" text="Playlists" />
-                              <Button fx:id="albumsButton" mnemonicParsing="false" onAction="#albumsButtonClick" styleClass="your-library-button" stylesheets="@../css/style.css" text="Albums" />
-                              <Button fx:id="artistsButton" mnemonicParsing="false" onAction="#artistsButtonClick" styleClass="your-library-button" stylesheets="@../css/style.css" text="Artists" />
+                              <Button fx:id="editarPlaylistButton" mnemonicParsing="false" onAction="#editarPlaylistsButtonClick" styleClass="your-library-button" stylesheets="@../css/style.css" text="Editar Playlist" />
+                              <Button fx:id="adicionarMusicaPlaylistButton" mnemonicParsing="false" onAction="#adicionarMusicaPlaylistButtonClick" styleClass="your-library-button" stylesheets="@../css/style.css" text="Adicionar" />
+                              <Button fx:id="removerMusicaPlaylistButton" mnemonicParsing="false" onAction="#removerMusicaPlaylistButtonClick" styleClass="your-library-button" stylesheets="@../css/style.css" text="Remover Musica" />
                            </children>
                            <VBox.margin>
                               <Insets left="8.0" />
@@ -156,11 +156,11 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="616.0" prefWidth="292.0" styleClass="secondary-color" stylesheets="@../css/style.css">
                            <children>
-                              <TableView fx:id="playlistTableView" layoutX="-1.0" prefHeight="385.0" prefWidth="294.0" style="-fx-background-color: transparent;">
+                              <TableView fx:id="playlistTableView" layoutX="-1.0" prefHeight="414.0" prefWidth="294.0" style="-fx-background-color: transparent;">
                                 <columns>
-                                    <TableColumn fx:id="playPlaylistButton" prefWidth="43.0" />
-                                  <TableColumn fx:id="nomePlaylistColumn" prefWidth="204.0" />
-                                  <TableColumn fx:id="removePlaylistColumn" prefWidth="118.0" />
+                                    <TableColumn fx:id="playPlaylistColumn" prefWidth="43.0" text="Select" />
+                                  <TableColumn fx:id="namePlaylistColumn" prefWidth="204.0" style="-fx-background-color: transparent;" text="Nome" />
+                                  <TableColumn fx:id="removePlaylistColumn" prefWidth="118.0" text="Remove" />
                                 </columns>
                               </TableView>
                            </children></AnchorPane>
@@ -230,9 +230,9 @@
                <content>
                   <TableView fx:id="musicTableView" prefHeight="538.0" prefWidth="978.0" style="-fx-background-color: transparent;">
                     <columns>
-                      <TableColumn fx:id="playColumn" prefWidth="57.0" />
-                      <TableColumn fx:id="nameColumn" minWidth="0.0" prefWidth="373.0" style="-fx-background-color: transparent;" />
-                        <TableColumn fx:id="albumColumn" prefWidth="265.0" />
+                      <TableColumn fx:id="playColumn" prefWidth="57.0" text="Select" />
+                      <TableColumn fx:id="nameColumn" minWidth="0.0" prefWidth="373.0" style="-fx-background-color: transparent;" text="Nome" />
+                        <TableColumn fx:id="albumColumn" prefWidth="265.0" text="Album" />
                         <TableColumn fx:id="artistColumn" prefWidth="230.0" text="Artist" />
                         <TableColumn fx:id="optionColumn" prefWidth="50.0" text="Options" />
                     </columns>
