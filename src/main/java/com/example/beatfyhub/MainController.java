@@ -94,6 +94,45 @@ public class MainController {
         artistColumn.setCellValueFactory(new PropertyValueFactory<>("artista"));
         albumColumn.setCellValueFactory(new PropertyValueFactory<>("album"));
 
+
+        if(trocar){
+
+            if(!playlistSelecionada.getPlaylist().isEmpty()){
+                musicasPlaylist.removeAll(musicasPlaylist);
+                musicasPlaylist.addAll(playlistSelecionada.getPlaylist());
+                System.out.println("caiu");
+            }
+            else{
+                musicasPlaylist.removeAll(musicasPlaylist);
+                System.out.println("oi"+musicasPlaylist);
+            }
+            musicTableView.setItems(musicasPlaylist);
+            trocar = false;
+        }
+
+        //Tabela de Playlist==================
+        System.out.println("Aqui3");
+        for (Playlist p: contPL.getMyPlaylists()){
+            if(!playlistList.contains(p)){
+                playlistList.add(p);
+            }
+        }
+
+        playlistTableView.setItems(playlistList);
+
+        addButtonToTablePlaylist();
+        addButtonToTableRemovePlaylist();
+        namePlaylistColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        //====================================
+
+        musicProgressBar.setStyle("-fx-accent: #8a1cff");
+        volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                player.setVolume(volumeSlider.getValue() * 0.01);
+            }
+        });
+    }
     //adicionar botoes tabela playlist
 
     private void addButtonToTablePlaylist(){
