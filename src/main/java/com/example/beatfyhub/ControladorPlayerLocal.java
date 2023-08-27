@@ -15,14 +15,14 @@ public class ControladorPlayerLocal {
 
 
     public ControladorPlayerLocal() {
-        this.myPlaylists = new RepositorioPlaylist();
-        this.mySongs = new RepositorioMusica();
-        this.myHistory = new RepositorioReproducaoMusica();
+        this.myPlaylists = RepositorioPlaylist.getInstance();
+        this.mySongs = RepositorioMusica.getInstance();
+        this.myHistory = RepositorioReproducaoMusica.getInstance();
     }
 
-    public void adicionarMusica(File f, Button b) {
+    public void adicionarMusica(File f) {
         if (f != null) {
-            mySongs.criarMusica(f, b);
+            mySongs.criarMusica(f);
         }
     }
 
@@ -42,6 +42,11 @@ public class ControladorPlayerLocal {
         }
     }
 
+    public void favoritar(File f){
+        if (f!=null){
+            mySongs.favoritarMusica(f);
+        }
+    }
     public void listarMusicas() {
         mySongs.listarMusicas();
     }
@@ -74,9 +79,16 @@ public class ControladorPlayerLocal {
         File diretorio = new File(caminho);
         File[] files = diretorio.listFiles();
         if (files!=null && files.length>0) {
-            mySongs.adicionarPorDiretorio(files, b);
+            mySongs.adicionarPorDiretorio(files);
         }
     }
+
+    public void salvar(){
+        mySongs.salvarArquivo();
+        myPlaylists.salvarArquivo();
+        myHistory.salvarArquivo();
+    }
+
 
     public ArrayList<Musica> getMySongs() {
         return mySongs.getMusicas();

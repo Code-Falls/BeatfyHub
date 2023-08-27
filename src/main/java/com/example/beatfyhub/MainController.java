@@ -47,10 +47,12 @@ public class MainController {
     @FXML private TextField playlistNameTextField, searchTextField;
     @FXML private ScrollPane musicScrollPane;
     @FXML private ProgressBar musicProgressBar;
-    @FXML private TableView<Musica> musicTableView;
-    @FXML private TableColumn<Musica, String> nameColumn, artistColumn, albumColumn;
-    @FXML private TableColumn<MainController, Button> playColumn, optionColumn;
-
+    @FXML private TableView<Musica> musicTableView = new TableView<>();
+    @FXML TableColumn<Musica, Void> playColumn = new TableColumn<>("Play");
+    @FXML private TableColumn<Musica, Void> optionColumn = new TableColumn<>("Options");
+    @FXML private TableColumn<Musica, String> nameColumn = new TableColumn<>("Nome");
+    @FXML private TableColumn<Musica, String> albumColumn = new TableColumn<>("Album");
+    @FXML private TableColumn<Musica, String> artistColumn = new TableColumn<>("Artista");
     private Media media;
     private MediaPlayer mediaPlayer;
     private Timer timer;
@@ -61,29 +63,96 @@ public class MainController {
     private ArrayList<File> songs;
     private boolean isPlaying;
     private ControladorPlayerLocal contPL = new ControladorPlayerLocal();
+    private File musicaTocando;
+    private ObservableList<Musica> musicList = FXCollections.observableArrayList();
 
-    private Button play = new Button("play");
+    private void addButtonToTable(){
+        Callback<TableColumn<Musica, Void>, TableCell<Musica, Void>> cellFactory = new Callback<TableColumn<Musica, Void>, TableCell<Musica, Void>>() {
+            @Override
+            public TableCell<Musica, Void> call(final TableColumn<Musica, Void> param) {
+                final TableCell<Musica, Void> cell = new TableCell<Musica, Void>() {
 
-//    public void clique() {
-//        play.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent event) {
-//            }
-//        });
-//
+                    private final Button btn = new Button("Play");
 
-    private static ObservableList<Musica> musicList;
+                    {
+                        btn.setOnAction((ActionEvent event) -> {
+                            Musica m = getTableView().getItems().get(getIndex());
+                            selectedAudioFile = m.getMp3();
+                            //player.stop();
+                            media = new Media(selectedAudioFile.toURI().toString());
+                            player = new MediaPlayer(media);
+                            playMedia();
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        playColumn.setCellFactory(cellFactory);
+
+    }
+
+
+    private void addButtonEraseToTable(){
+        Callback<TableColumn<Musica, Void>, TableCell<Musica, Void>> cellFactory = new Callback<TableColumn<Musica, Void>, TableCell<Musica, Void>>() {
+            @Override
+            public TableCell<Musica, Void> call(final TableColumn<Musica, Void> param) {
+                final TableCell<Musica, Void> cell = new TableCell<Musica, Void>() {
+
+                    private final Button btn = new Button("Apagar");
+
+                    {
+                        btn.setOnAction((ActionEvent event) -> {
+                            Musica m = getTableView().getItems().get(getIndex());
+                            if(player!=null){
+                                player.stop();
+                            }
+                            musicList.remove(m);
+                            contPL.removerMusica(m.getNome());
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        optionColumn.setCellFactory(cellFactory);
+
+    }
+
 
     @FXML
     private void initialize() {
-        PropertyValueFactory<MainController, Button> play = new PropertyValueFactory<>("play");
-        PropertyValueFactory<MainController, Button> options = new PropertyValueFactory<>("options");
-        playColumn.setCellValueFactory(play);
+System.out.println("aqui");
+        contPL.listarMusicas();
+
+        musicList.addAll(contPL.getMySongs());
+        addButtonToTable();
+        addButtonEraseToTable();
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
         artistColumn.setCellValueFactory(new PropertyValueFactory<>("artista"));
         albumColumn.setCellValueFactory(new PropertyValueFactory<>("album"));
-        optionColumn.setCellValueFactory(options);
-        //clique();
     }
 
     public void beginTimer () {
@@ -123,10 +192,8 @@ public class MainController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arquivos MP3", "*.mp3"));
         selectedAudioFile = fileChooser.showOpenDialog(newSongButton.getScene().getWindow());
-        contPL.adicionarMusica(selectedAudioFile, play);
-        ObservableList<Musica> musicList = FXCollections.observableArrayList();
-
-        musicList.addAll(contPL.getMySongs());
+        contPL.adicionarMusica(selectedAudioFile);
+        musicList.add(contPL.procurarMusica(selectedAudioFile.getName()));
         musicTableView.setItems(musicList);
 
         if (selectedAudioFile != null) {
@@ -147,7 +214,7 @@ public class MainController {
             File[] musicFiles = selectedFolder.listFiles((dir, name) -> name.toLowerCase().endsWith(".mp3"));
             if (musicFiles != null) {
                 for (File musicFile : musicFiles) {
-                    contPL.adicionarMusica(musicFile, play);
+                    contPL.adicionarMusica(musicFile);
                 }
             }
         }
@@ -207,9 +274,18 @@ public class MainController {
     @FXML
     private void favoriteMedia() {
         System.out.println("media favoritada");
-//        favoriteButton.setImage(new Image("images/fullLikedButton.png"));
-        contPL.adicionarMusica(selectedAudioFile, play);
 
+        System.out.println(musicaTocando.getName());
+
+        contPL.favoritar(musicaTocando);
+
+        if(contPL.procurarMusica(musicaTocando.getName()).getFavorita()){
+            System.out.println("aqui3");
+            favoriteButton.setImage(new Image("images/fullLikedButton.png"));
+        }
+        else {
+            favoriteButton.setImage(new Image("images/favoritar.png"));
+        }
     }
 
     @FXML
@@ -223,15 +299,14 @@ public class MainController {
         System.out.println("media anterior");
     }
 
-    @FXML
-    private void playMedia() {
+    public void tocar(){
         System.out.println("media tocando");
 
-        //selectedAudioFile = contPL.procurarMusica(label.getText()).getMp3();
+        musicaTocando = selectedAudioFile;
 
-        if (selectedAudioFile != null) {
+        if (musicaTocando != null) {
             if (player == null) {
-                media = new Media(selectedAudioFile.toURI().toString());
+                media = new Media(musicaTocando.toURI().toString());
                 player = new MediaPlayer(media);
                 player.setOnEndOfMedia(() -> {
                     player.stop();
@@ -240,7 +315,7 @@ public class MainController {
                 });
                 playButton.setImage(new Image("images/pauseButton.png"));
                 player.play();
-                contPL.salvarReproducao(selectedAudioFile, LocalDateTime.now());
+                contPL.salvarReproducao(musicaTocando, LocalDateTime.now());
                 isPlaying = true;
                 beginTimer();
             } else if (isPlaying) {
@@ -257,6 +332,12 @@ public class MainController {
         }
     }
 
+
+    @FXML
+    private void playMedia() {
+        tocar();
+    }
+
     @FXML
     private void nextMedia() {
         System.out.println("proxima media");
@@ -270,6 +351,7 @@ public class MainController {
     @FXML
     private void saveButtonClick() {
         System.out.println("Arquivos Salvos");
+        contPL.salvar();
     }
 
     @FXML

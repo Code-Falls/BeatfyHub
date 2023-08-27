@@ -28,15 +28,12 @@ public class Musica {
     private String album;
     private String path;
     private File mp3;
-    private Button play;
-    private Button options;
 
-    public Musica(File mp, Button btn) throws IOException, TikaException,  org.xml.sax.SAXException {
+    public Musica(File mp) throws IOException, TikaException,  org.xml.sax.SAXException {
         this.nome = mp.getName();
         this.mp3 = mp;
         this.path = mp.getAbsolutePath();
-        this.play = btn;
-        this.options = new Button("Opt");
+        this.favorita = false;
 
         Parser parser = new AutoDetectParser();
         BodyContentHandler handler = new BodyContentHandler();
@@ -62,6 +59,10 @@ public class Musica {
     @Override
     public String toString() {
         return "\nNome: " + nome + "\nArtista: "+ artista + "\nGenero: " + genero + "\nAlbum: " + album;
+    }
+
+    public void setFavorita(Boolean favorita) {
+        this.favorita = favorita;
     }
 
     public File getMp3() {
@@ -96,11 +97,11 @@ public class Musica {
         return path;
     }
 
-    public Button getPlay() {
-        return play;
-    }
-
-    public Button getOptions() {
-        return options;
-    }
+//    public Button getPlay() {
+//        return play;
+//    }
+//
+//    public Button getOptions() {
+//        return options;
+//    }
 }
