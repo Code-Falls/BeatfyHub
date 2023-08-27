@@ -55,6 +55,7 @@ public class MainController {
     @FXML private TableColumn<Musica, String> nameColumn = new TableColumn<>("Nome");
     @FXML private TableColumn<Musica, String> albumColumn = new TableColumn<>("Album");
     @FXML private TableColumn<Musica, String> artistColumn = new TableColumn<>("Artista");
+    @FXML private Slider volumeSlider;
     private Media media;
     private MediaPlayer mediaPlayer;
     private Timer timer;
@@ -145,7 +146,7 @@ public class MainController {
 
     @FXML
     private void initialize() {
-System.out.println("aqui");
+        System.out.println("aqui");
         contPL.listarMusicas();
 
         musicList.addAll(contPL.getMySongs());
@@ -170,7 +171,7 @@ System.out.println("aqui");
             public void run() {
 
                 isPlaying = true;
-                double current = mediaPlayer.getCurrentTime().toSeconds();
+                double current = player.getCurrentTime().toSeconds();
                 double end = media.getDuration().toSeconds();
                 System.out.println(current/end);
                 musicProgressBar.setProgress(current/end);

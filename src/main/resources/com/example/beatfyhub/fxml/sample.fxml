@@ -335,7 +335,7 @@
                         <Image url="@../../../../images/volumeDown.png" />
                      </image>
                   </ImageView>
-                  <Slider prefHeight="16.0" prefWidth="108.0" stylesheets="@../css/slider.css" />
+                  <Slider fx:id="volumeSlider" prefHeight="16.0" prefWidth="108.0" stylesheets="@../css/slider.css" />
                </children>
             </HBox>
          </children>
