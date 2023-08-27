@@ -68,7 +68,7 @@ public class MainController {
     //===================================//
     private Media media;
     private MediaPlayer mediaPlayer;
-    private Timer timer;
+    private Timer timer = new Timer();
     private TimerTask task;
     private MediaPlayer player;
     private File selectedAudioFile;
@@ -84,6 +84,9 @@ public class MainController {
     private static boolean trocar = false;
 
     private Playlist playlistSelecionada;
+
+    private ArrayList<Musica> playlistTocarInteira = new ArrayList<>();
+    private int songNumber;
 
     @FXML
     private void initialize() {
@@ -132,6 +135,14 @@ public class MainController {
                 player.setVolume(volumeSlider.getValue() * 0.01);
             }
         });
+
+        if(!playlistTocarInteira.isEmpty()){
+            media = new Media(playlistTocarInteira.get(songNumber).getMp3().toURI().toString());
+            player = new MediaPlayer(media);
+            songLabel.setText(playlistTocarInteira.get(songNumber).getNome());
+            musicaTocando = playlistTocarInteira.get(songNumber).getMp3();
+        }
+
     }
     //adicionar botoes tabela playlist
 
@@ -147,6 +158,12 @@ public class MainController {
                         btn.setOnAction((ActionEvent event) -> {
                             Playlist p = getTableView().getItems().get(getIndex());
                             playlistSelecionada = p;
+                            playlistTocarInteira = p.getPlaylist();
+                            songNumber = 0;
+                            if(!playlistTocarInteira.isEmpty()){
+                                media = new Media(playlistTocarInteira.get(songNumber).getMp3().toURI().toString());
+                                player = new MediaPlayer(media);
+                            }
                             System.out.println(p);
                             trocar = true;
                             initialize();
@@ -226,8 +243,11 @@ public class MainController {
                                 player.stop();
                             }
                             selectedAudioFile = m.getMp3();
-                            definirMusicaaTocar(m);
-                            songLabel.setText(m.getNome().replace(".mp3", ""));
+                            //ToDo arrumar song number na playlist==================================
+                            songNumber = contPL.getMySongs().indexOf(m);
+                            //playMedia();
+//                            definirMusicaaTocar(m);
+//                            songLabel.setText(m.getNome().replace(".mp3", ""));
                             tocarMusicaSelecionada();
                         });
                     }
@@ -320,6 +340,7 @@ public class MainController {
     @FXML
     private void homeButtonClick(ActionEvent event) {
         musicTableView.setItems(musicList);
+        playlistTocarInteira = contPL.getMySongs();
     }
 
     @FXML
@@ -332,6 +353,7 @@ public class MainController {
         musicList.add(contPL.procurarMusica(selectedAudioFile.getName()));
         selectedAudioFile = null;
         musicTableView.setItems(musicList);
+        initialize();
     }
 
     @FXML
@@ -351,7 +373,8 @@ public class MainController {
             }
         }
         musicTableView.setItems(musicList);
-
+        playlistTocarInteira = contPL.getMySongs();
+    initialize();
     }
 
     @FXML
@@ -436,7 +459,23 @@ public class MainController {
 
     @FXML
     private void previousMedia() {
-        System.out.println("media anterior");
+        if (songNumber > 0) {
+            songNumber--;
+
+        }
+        else {
+            songNumber = playlistTocarInteira.size() - 1;
+
+        }
+        player.stop();
+        if(isPlaying) {
+            cancelTimer();
+        }
+        media = new Media(playlistTocarInteira.get(songNumber).getMp3().toURI().toString());
+        player = new MediaPlayer(media);
+        songLabel.setText(playlistTocarInteira.get(songNumber).getNome());
+        musicaTocando = playlistTocarInteira.get(songNumber).getMp3();
+        playMedia();
     }
 
 
@@ -452,7 +491,23 @@ public class MainController {
 
     @FXML
     private void nextMedia() {
-        System.out.println("proxima media");
+        if (songNumber < playlistTocarInteira.size() -1) {
+            songNumber++;
+
+        }
+        else {
+            songNumber = 0;
+
+        }
+        player.stop();
+        if(isPlaying) {
+            cancelTimer();
+        }
+        media = new Media(playlistTocarInteira.get(songNumber).getMp3().toURI().toString());
+        player = new MediaPlayer(media);
+        songLabel.setText(playlistTocarInteira.get(songNumber).getNome());
+        musicaTocando = playlistTocarInteira.get(songNumber).getMp3();
+        playMedia();
     }
 
     @FXML
@@ -594,20 +649,25 @@ public class MainController {
     }
 
     public void tocarMusicaSelecionada(){
-        if(musicaTocando!=null){
-            media = new Media(musicaTocando.toURI().toString());
-            player = new MediaPlayer(media);
-            player.setOnEndOfMedia(() -> {
-                player.stop();
-                playButton.setImage(new Image("images/playButton.png"));
-                isPlaying = false;
-            });
-            playButton.setImage(new Image("images/pauseButton.png"));
-            player.play();
-            contPL.salvarReproducao(musicaTocando, LocalDateTime.now());
-            isPlaying = true;
-            beginTimer();
-        }
+//        if(musicaTocando!=null){
+//            media = new Media(musicaTocando.toURI().toString());
+//            player = new MediaPlayer(media);
+//            player.setOnEndOfMedia(() -> {
+//                player.stop();
+//                playButton.setImage(new Image("images/playButton.png"));
+//                isPlaying = false;
+//            });
+//            playButton.setImage(new Image("images/pauseButton.png"));
+//            player.play();
+//            contPL.salvarReproducao(musicaTocando, LocalDateTime.now());
+//            isPlaying = true;
+//            beginTimer();
+//        }
+        media = new Media(playlistTocarInteira.get(songNumber).getMp3().toURI().toString());
+        player = new MediaPlayer(media);
+        songLabel.setText(playlistTocarInteira.get(songNumber).getNome());
+        musicaTocando = playlistTocarInteira.get(songNumber).getMp3();
+        playMedia();
     }
 
     public void pausarMusica(){

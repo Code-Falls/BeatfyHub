@@ -7,11 +7,8 @@
     <list default="true" id="467917b0-d825-4d0b-8bc3-42c0ec50935e" name="Changes" comment="Table View Playlist Tentado">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/beatfyhub/fxml/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/beatfyhub/fxml/sample.fxml" afterDir="false" />
     </list>
-    <list id="5214c802-0a84-4f95-a03f-cb9d871cc016" name="Changes by gabriel" comment="Changes by gabriel">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainController.java" afterDir="false" />
-    </list>
+    <list id="5214c802-0a84-4f95-a03f-cb9d871cc016" name="Changes by gabriel" comment="Changes by gabriel" />
     <list id="08dd8dce-126b-4be4-9ed1-109177848eb6" name="Changes by nichc" comment="code with me" />
     <list id="85072bb1-2d5b-4d84-98ef-2aaec057692c" name="Changes by nykdos" comment="Changes by nykdos" />
     <list id="7b9db792-d82a-4637-b8c0-44b9a893c555" name="Changes by Pichau" comment="" />
@@ -50,37 +47,6 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainController.java">
-      <ranges>
-        <range start1="45" end1="46" start2="45" end2="46" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="64" end1="67" start2="64" end2="67" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="79" end1="81" start2="79" end2="84" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="82" end1="82" start2="85" end2="95" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="83" end1="83" start2="96" end2="135" changelist="5214c802-0a84-4f95-a03f-cb9d871cc016" />
-        <range start1="96" end1="98" start2="148" end2="152" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="115" end1="116" start2="169" end2="170" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="119" end1="119" start2="173" end2="209" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="137" end1="137" start2="227" end2="228" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="200" end1="221" start2="291" end2="291" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="241" end1="241" start2="311" end2="313" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="249" end1="250" start2="321" end2="321" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="255" end1="256" start2="326" end2="326" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="262" end1="262" start2="332" end2="333" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="263" end1="271" start2="334" end2="334" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="305" end1="307" start2="368" end2="370" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="310" end1="312" start2="373" end2="375" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="315" end1="317" start2="378" end2="383" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="322" end1="322" start2="388" end2="390" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="329" end1="329" start2="397" end2="399" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="334" end1="335" start2="404" end2="404" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="472" end1="487" start2="541" end2="541" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="539" end1="540" start2="593" end2="593" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="579" end1="585" start2="632" end2="632" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="586" end1="586" start2="633" end2="637" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-      </ranges>
-    </file>
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -151,7 +117,7 @@
       <updated>1691281416646</updated>
       <workItem from="1693092211229" duration="11305000" />
       <workItem from="1693104116759" duration="8993000" />
-      <workItem from="1693144376934" duration="11542000" />
+      <workItem from="1693144376934" duration="15662000" />
     </task>
     <task id="LOCAL-00001" summary="tentativa de criar uma classe midia">
       <option name="closed" value="true" />
@@ -361,7 +327,23 @@
       <option name="project" value="LOCAL" />
       <updated>1693113146928</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Table View Playlist Tentado">
+      <option name="closed" value="true" />
+      <created>1693155993635</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1693155993635</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Changes by gabriel">
+      <option name="closed" value="true" />
+      <created>1693156015650</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1693156015650</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
