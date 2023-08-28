@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1315.0" style="-fx-background-color: #000000;" styleClass="primary-color" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.beatfyhub.MainController">
+   <left>
+      <VBox prefHeight="600.0" prefWidth="327.0" spacing="10.0" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="166.0" prefWidth="235.0" stylesheets="@../css/style.css">
+               <children>
+                  <VBox prefHeight="170.0" prefWidth="219.0" spacing="10.0" style="-fx-background-color: #121212; -fx-background-radius: 10;">
+                     <children>
+                        <HBox fx:id="homeContainer" alignment="CENTER_LEFT" onMouseEntered="#toColorHomeButton" prefHeight="43.0" prefWidth="235.0" spacing="20.0">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../images/homeButton.png" />
+                                 </image>
+                              </ImageView>
+                              <Button fx:id="homeButton" mnemonicParsing="false" onAction="#homeButtonClick" prefHeight="33.0" prefWidth="178.0" styleClass="navbar-button" stylesheets="@../css/style.css" text="Home" textFill="#8a1cff">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets left="15.0" />
+                           </padding>
+                        </HBox>
+                        <HBox fx:id="newSongContainer" alignment="CENTER_LEFT" onMouseEntered="#toColorNewSongButton" prefHeight="29.0" prefWidth="235.0" spacing="20.0">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../images/songNote.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Button fx:id="newSongButton" mnemonicParsing="false" onAction="#newSongButtonClick" prefHeight="57.0" prefWidth="170.0" styleClass="navbar-button" stylesheets="@../css/style.css" text="New Song" textFill="#8a1cff">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <padding>
+                              <Insets left="15.0" />
+                           </padding>
+                        </HBox>
+                        <HBox fx:id="newFolderContainer" alignment="CENTER_LEFT" onMouseEntered="#toColorNewFolderButton" prefHeight="50.0" prefWidth="200.0" spacing="20.0">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../images/exploreFolderButton.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Button fx:id="newFolderButton" mnemonicParsing="false" onAction="#newFolderButtonClick" prefHeight="33.0" prefWidth="170.0" styleClass="navbar-button" stylesheets="@../css/style.css" text="New Folder" textFill="#8a1cff">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <padding>
+                              <Insets left="15.0" />
+                           </padding>
+                        </HBox>
+                        <HBox fx:id="recentPlayedContainer" alignment="CENTER_LEFT" onMouseEntered="#toColorRecentPlayedButton" prefHeight="50.0" prefWidth="200.0" spacing="20.0">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../images/historyButton.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets top="-5.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Button fx:id="recentButton" mnemonicParsing="false" onAction="#recentButtonClick" prefHeight="30.0" prefWidth="178.0" styleClass="navbar-button" stylesheets="@../css/style.css" text="Last Played" textFill="#8a1cff">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets left="15.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="50.0" />
+                     </VBox.margin>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="300.0" prefWidth="201.0" style="-fx-background-radius: 10; -fx-background-color: #121212;">
+               <children>
+                  <VBox prefHeight="73.0" prefWidth="311.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="311.0">
+                           <children>
+                              <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../images/songLibrary.png" />
+                                 </image>
+                              </ImageView>
+                              <Label style="-fx-font-weight: bold;" text="Your Library" textFill="#8a1cff">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="27.0" prefWidth="303.0" spacing="10.0">
+                           <children>
+                              <Button fx:id="editarPlaylistButton" mnemonicParsing="false" onAction="#editarPlaylistsButtonClick" styleClass="your-library-button" stylesheets="@../css/style.css" text="Editar Playlist" />
+                              <Button fx:id="adicionarMusicaPlaylistButton" mnemonicParsing="false" onAction="#adicionarMusicaPlaylistButtonClick" styleClass="your-library-button" stylesheets="@../css/style.css" text="Adicionar" />
+                              <Button fx:id="removerMusicaPlaylistButton" mnemonicParsing="false" onAction="#removerMusicaPlaylistButtonClick" styleClass="your-library-button" stylesheets="@../css/style.css" text="Remover Musica" />
+                           </children>
+                           <VBox.margin>
+                              <Insets left="8.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <ScrollPane prefHeight="222.0" prefWidth="311.0" style="-fx-background-color: trasnparent;">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="616.0" prefWidth="292.0" styleClass="secondary-color" stylesheets="@../css/style.css">
+                           <children>
+                              <TableView fx:id="playlistTableView" layoutX="-1.0" prefHeight="414.0" prefWidth="294.0" style="-fx-background-color: transparent;">
+                                <columns>
+                                    <TableColumn fx:id="playPlaylistColumn" prefWidth="43.0" text="Select" />
+                                  <TableColumn fx:id="namePlaylistColumn" prefWidth="204.0" style="-fx-background-color: transparent;" text="Nome" />
+                                  <TableColumn fx:id="removePlaylistColumn" prefWidth="118.0" text="Remove" />
+                                </columns>
+                              </TableView>
+                           </children></AnchorPane>
+                    </content>
+                  </ScrollPane>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets left="8.0" right="8.0" />
+               </VBox.margin>
+            </VBox>
+            <HBox fx:id="newPlaylistContainer" alignment="CENTER_LEFT" onMouseEntered="#toColorNewPlaylistButton" prefHeight="58.0" prefWidth="327.0" styleClass="top-border" stylesheets="@../css/style.css">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/addPlaylist.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="newPlaylistButton" mnemonicParsing="false" onAction="#newPlaylistButtonClick" prefHeight="27.0" prefWidth="205.0" styleClass="navbar-button" stylesheets="@../css/style.css" text="New Playlist" textFill="#8a1cff">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+   </left>
+   <center>
+      <VBox prefHeight="700.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="1080.0">
+               <children>
+                  <Button mnemonicParsing="false" style="-fx-background-color: transparent;" />
+                  <HBox maxHeight="-Infinity" prefHeight="35.0" prefWidth="357.0" styleClass="search-container" stylesheets="@../css/style.css">
+                     <children>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/searchButton.png" />
+                           </image>
+                        </ImageView>
+                        <TextField fx:id="searchTextField" onKeyPressed="#searchTextFieldEnter" prefHeight="29.0" prefWidth="199.0" promptText="Search" style="-fx-background-color: transparent;" />
+                     </children>
+                     <padding>
+                        <Insets top="6.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="33.0" prefWidth="824.0">
+                     <children>
+                        <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveButtonClick" prefHeight="40.0" prefWidth="100.0" styleClass="save-button" stylesheets="@../css/style.css" text="Salvar">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children></HBox>
+               </children>
+            </HBox>
+            <TableView fx:id="musicTableView" prefHeight="538.0" prefWidth="978.0" style="-fx-background-color: transparent;">
+              <columns>
+                <TableColumn fx:id="playColumn" prefWidth="57.0" text="Select" />
+                <TableColumn fx:id="nameColumn" minWidth="0.0" prefWidth="373.0" style="-fx-background-color: transparent;" text="Nome" />
+                  <TableColumn fx:id="albumColumn" prefWidth="265.0" text="Album" />
+                  <TableColumn fx:id="artistColumn" prefWidth="230.0" text="Artist" />
+                  <TableColumn fx:id="optionColumn" prefWidth="50.0" text="Options" />
+              </columns>
+            </TableView>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-border-color: #c997ff; -fx-border-radius: 10px;" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="100.0" prefWidth="24.0" HBox.hgrow="ALWAYS" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="380.0">
+               <children>
+                  <ImageView fx:id="albumCoverImage" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets right="25.0" />
+                     </HBox.margin></ImageView>
+                  <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="217.0">
+                     <children>
+                        <Label fx:id="songLabel" prefHeight="27.0" prefWidth="242.0" text="Music name" textFill="#8a1cff">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="artistLabel" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="242.0" text="Music Artist" textFill="#a869eb">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <ImageView fx:id="favoriteButton" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#favoriteMedia" onMouseEntered="#toColorFavoriteButton" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/favoritar.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="-20.0" top="-15.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+            <VBox prefHeight="100.0" prefWidth="722.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+                     <children>
+                        <ImageView fx:id="shuffleButton" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#shuffleMedia" onMouseEntered="#toColorShuffleButton" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/shuffleButton.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="previousButton" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#previousMedia" onMouseEntered="#toColorPreviousButton" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/previousButton.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="playButton" fitHeight="45.0" fitWidth="45.0" layoutX="40.0" layoutY="10.0" onMouseClicked="#playMedia" onMouseEntered="#toColorPlayButton" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/playButton.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="nextButton" fitHeight="30.0" fitWidth="30.0" layoutX="71.0" layoutY="10.0" onMouseClicked="#nextMedia" onMouseEntered="#toColorNextButton" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/nextButton.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="loopButton" fitHeight="30.0" fitWidth="30.0" layoutX="101.0" layoutY="10.0" onMouseClicked="#loopMedia" onMouseEntered="#toColorLoopButton" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/repeatButton.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <padding>
+                        <Insets top="-20.0" />
+                     </padding>
+                  </HBox>
+                  <HBox fx:id="songProgressBar">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <children>
+                        <Label text="00:00" textFill="WHITE">
+                           <padding>
+                              <Insets top="-30.0" />
+                           </padding>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <ProgressBar fx:id="musicProgressBar" prefHeight="18.0" prefWidth="622.0" progress="0.0" />
+                        <Label layoutX="10.0" layoutY="10.0" text="00:00" textFill="WHITE">
+                           <padding>
+                              <Insets top="-30.0" />
+                           </padding>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="217.0">
+               <children>
+                  <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/volumeDown.png" />
+                     </image>
+                  </ImageView>
+                  <Slider fx:id="volumeSlider" prefHeight="16.0" prefWidth="108.0" stylesheets="@../css/slider.css" value="20.0" />
+               </children>
+            </HBox>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </HBox>
+   </bottom>
+</BorderPane>
