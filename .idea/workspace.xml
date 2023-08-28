@@ -4,18 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="467917b0-d825-4d0b-8bc3-42c0ec50935e" name="Changes" comment="Table View Playlist Tentado">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/beatfyhub/fxml/last-played-view.fxml" afterDir="false" />
+    <list default="true" id="467917b0-d825-4d0b-8bc3-42c0ec50935e" name="Changes" comment="TUDO FUNCIONANDO (falta o recent played) :/">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/beatfyhub/fxml/main-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_08_2023_00_09_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_08_2023_00_09__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/image.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/ControladorPlayerLocal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/ControladorPlayerLocal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/ReproducaoMusica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/ReproducaoMusica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/beatfyhub/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/beatfyhub/css/style.css" afterDir="false" />
     </list>
-    <list id="12644e5c-20a0-4717-9760-7fc7fa4382c9" name="Changes by gabriel" comment="">
+    <list id="12644e5c-20a0-4717-9760-7fc7fa4382c9" name="Changes by gabriel" comment="" />
+    <list id="034d70be-a178-4e21-87ad-fb91d1ef3451" name="Changes by Marcela" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainController.java" afterDir="false" />
     </list>
-    <list id="034d70be-a178-4e21-87ad-fb91d1ef3451" name="Changes by Marcela" comment="" />
     <list id="08dd8dce-126b-4be4-9ed1-109177848eb6" name="Changes by nichc" comment="code with me" />
     <list id="85072bb1-2d5b-4d84-98ef-2aaec057692c" name="Changes by nykdos" comment="Changes by nykdos" />
     <list id="7b9db792-d82a-4637-b8c0-44b9a893c555" name="Changes by Pichau" comment="" />
@@ -55,66 +57,78 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GithubProjectSettings">
-    <option name="branchProtectionPatterns">
-      <list>
-        <option value="test-ncs" />
-      </list>
-    </option>
-  </component>
   <component name="LineStatusTrackerManager">
     <file path="$PROJECT_DIR$/src/main/java/com/example/beatfyhub/MainController.java">
       <ranges>
-        <range start1="22" end1="22" start2="22" end2="23" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="23" end1="23" start2="24" end2="25" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="49" end1="57" start2="51" end2="67" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="58" end1="64" start2="68" end2="80" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="67" end1="71" start2="83" end2="91" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="72" end1="72" start2="92" end2="108" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="86" end1="86" start2="122" end2="124" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="106" end1="107" start2="144" end2="145" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="108" end1="109" start2="146" end2="147" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="112" end1="114" start2="150" end2="151" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="115" end1="116" start2="152" end2="153" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="121" end1="121" start2="158" end2="167" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="124" end1="126" start2="170" end2="172" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="145" end1="146" start2="191" end2="192" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="152" end1="153" start2="198" end2="200" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="154" end1="156" start2="201" end2="202" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="163" end1="164" start2="209" end2="210" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="200" end1="201" start2="246" end2="247" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="240" end1="241" start2="286" end2="287" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="252" end1="253" start2="298" end2="298" changelist="12644e5c-20a0-4717-9760-7fc7fa4382c9" />
-        <range start1="278" end1="279" start2="323" end2="324" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="289" end1="290" start2="334" end2="335" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="317" end1="318" start2="362" end2="363" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="326" end1="328" start2="371" end2="373" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="329" end1="330" start2="374" end2="375" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="338" end1="339" start2="383" end2="384" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="351" end1="352" start2="396" end2="397" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="364" end1="365" start2="409" end2="410" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="373" end1="374" start2="418" end2="419" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="381" end1="382" start2="426" end2="427" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="386" end1="387" start2="431" end2="442" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="389" end1="389" start2="444" end2="455" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="396" end1="397" start2="462" end2="463" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="446" end1="447" start2="512" end2="513" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="449" end1="451" start2="515" end2="516" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="455" end1="458" start2="520" end2="523" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="460" end1="462" start2="525" end2="527" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="470" end1="471" start2="535" end2="536" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="488" end1="490" start2="553" end2="554" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="494" end1="495" start2="558" end2="559" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="510" end1="511" start2="574" end2="575" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="512" end1="514" start2="576" end2="577" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="520" end1="521" start2="583" end2="584" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="523" end1="525" start2="586" end2="587" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="529" end1="530" start2="591" end2="592" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="660" end1="661" start2="722" end2="723" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="670" end1="671" start2="732" end2="732" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="702" end1="703" start2="763" end2="764" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="708" end1="709" start2="769" end2="770" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
-        <range start1="723" end1="724" start2="784" end2="785" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="2" end1="6" start2="2" end2="3" changelist="034d70be-a178-4e21-87ad-fb91d1ef3451" />
+        <range start1="9" end1="10" start2="6" end2="6" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="11" end1="13" start2="7" end2="7" changelist="034d70be-a178-4e21-87ad-fb91d1ef3451" />
+        <range start1="20" end1="22" start2="14" end2="14" changelist="034d70be-a178-4e21-87ad-fb91d1ef3451" />
+        <range start1="26" end1="28" start2="18" end2="18" changelist="034d70be-a178-4e21-87ad-fb91d1ef3451" />
+        <range start1="34" end1="43" start2="24" end2="24" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="44" end1="45" start2="25" end2="26" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="52" end1="53" start2="33" end2="34" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="56" end1="57" start2="37" end2="38" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="59" end1="61" start2="40" end2="40" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="109" end1="110" start2="88" end2="88" changelist="034d70be-a178-4e21-87ad-fb91d1ef3451" />
+        <range start1="111" end1="112" start2="89" end2="89" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="114" end1="116" start2="91" end2="91" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="117" end1="118" start2="92" end2="93" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="119" end1="125" start2="94" end2="98" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="126" end1="127" start2="99" end2="99" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="128" end1="130" start2="100" end2="101" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="133" end1="135" start2="104" end2="104" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="142" end1="143" start2="111" end2="111" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="149" end1="150" start2="117" end2="117" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="152" end1="153" start2="119" end2="119" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="168" end1="169" start2="134" end2="134" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="184" end1="190" start2="149" end2="150" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="210" end1="211" start2="170" end2="171" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="213" end1="214" start2="173" end2="174" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="215" end1="216" start2="175" end2="176" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="226" end1="226" start2="186" end2="187" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="238" end1="239" start2="199" end2="199" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="247" end1="248" start2="207" end2="208" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="250" end1="251" start2="210" end2="211" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="252" end1="253" start2="212" end2="213" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="262" end1="262" start2="222" end2="224" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="274" end1="275" start2="236" end2="236" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="287" end1="288" start2="248" end2="249" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="290" end1="291" start2="251" end2="252" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="292" end1="293" start2="253" end2="254" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="302" end1="302" start2="263" end2="264" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="314" end1="315" start2="276" end2="276" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="324" end1="325" start2="285" end2="286" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="327" end1="328" start2="288" end2="289" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="329" end1="330" start2="290" end2="291" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="340" end1="340" start2="301" end2="302" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="352" end1="353" start2="314" end2="314" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="365" end1="366" start2="326" end2="327" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="373" end1="373" start2="334" end2="335" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="390" end1="391" start2="352" end2="353" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="396" end1="398" start2="358" end2="359" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="430" end1="432" start2="391" end2="392" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="439" end1="442" start2="399" end2="399" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="452" end1="453" start2="409" end2="409" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="457" end1="458" start2="413" end2="413" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="461" end1="462" start2="416" end2="417" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="470" end1="471" start2="425" end2="426" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="477" end1="478" start2="432" end2="433" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="491" end1="493" start2="446" end2="448" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="500" end1="503" start2="455" end2="455" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="507" end1="508" start2="459" end2="459" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="513" end1="514" start2="464" end2="464" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="536" end1="537" start2="486" end2="486" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="578" end1="578" start2="527" end2="528" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="605" end1="606" start2="555" end2="555" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="610" end1="611" start2="559" end2="559" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="616" end1="619" start2="564" end2="565" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="622" end1="628" start2="568" end2="570" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="630" end1="636" start2="572" end2="574" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="669" end1="688" start2="607" end2="607" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="689" end1="695" start2="608" end2="610" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="697" end1="703" start2="612" end2="614" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
+        <range start1="793" end1="794" start2="704" end2="704" changelist="467917b0-d825-4d0b-8bc3-42c0ec50935e" />
       </ranges>
     </file>
   </component>
@@ -136,25 +150,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "Teste-GabrielC",
-    "jdk.selected.JAVA_MODULE": "20",
-    "last_opened_file_path": "D:/BeatfyHub/src/main/resources/com/example/beatfyhub/fxml",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Teste-GabrielC&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;20&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/BeatfyHub/src/main/resources/com/example/beatfyhub/fxml&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\BeatfyHub\src\main\resources\com\example\beatfyhub\fxml" />
@@ -174,7 +188,7 @@
     <configuration name="MainView" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.example.beatfyhub.MainView" />
       <module name="Beat-fy-HUB" />
-      <option name="VM_PARAMETERS" value="--module-path D:\JDKs\javafx-sdk-20.0.2\lib --add-modules javafx.controls,javafx.fxml,javafx.controls,javafx.media" />
+      <option name="VM_PARAMETERS" value="--module-path $USER_HOME$/javafx-sdk-20.0.2/lib --add-modules javafx.controls,javafx.fxml,javafx.controls,javafx.media" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

@@ -7,7 +7,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -32,17 +31,8 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import javazoom.jl.player.Player;
-import javazoom.jl.player.advanced.AdvancedPlayer;
-import org.apache.tika.exception.TikaException;
-import org.apache.tika.metadata.Metadata;
-import org.jaudiotagger.audio.AudioFile;
-import org.jaudiotagger.audio.AudioFileIO;
-import org.jaudiotagger.tag.FieldKey;
-import org.jaudiotagger.tag.Tag;
-import org.xml.sax.SAXException;
 
-import java.net.URL;
+
 import java.io.FileInputStream;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -50,15 +40,13 @@ import java.util.*;
 public class MainController {
 
     @FXML
-    private Button homeButton, newFolderButton, newSongButton, loadButton, recentButton, likedButton, adicionarMusicaPlaylistButton, editarPlaylistButton, removerMusicaPlaylistButton, newPlaylistButton, createPlaylistButton, cancelPlaylistButton;
+    private Button newFolderButton, newSongButton, createPlaylistButton, cancelPlaylistButton;
     @FXML
     private ImageView playButton, previousButton, nextButton, loopButton, shuffleButton, favoriteButton, albumCoverImage;
     @FXML
-    private HBox homeContainer, exploreContainer, recentPlayedContainer, newPlaylistContainer, newSongContainer, newFolderContainer;
+    private HBox homeContainer, recentPlayedContainer, newPlaylistContainer, newSongContainer, newFolderContainer;
     @FXML
     private TextField playlistNameTextField, searchTextField;
-    @FXML
-    private ScrollPane musicScrollPane;
     @FXML
     private ProgressBar musicProgressBar = new ProgressBar();
     @FXML
@@ -109,29 +97,20 @@ public class MainController {
     private Media media;
     private MediaPlayer mediaPlayer;
     private Timer timer = new Timer();
-    private TimerTask task;
     private MediaPlayer player;
     private File selectedAudioFile;
-    private int numMusicLabels = 0;
-    private ArrayList<File> songs;
     private boolean isPlaying;
-    private ControladorPlayerLocal contPL = new ControladorPlayerLocal();
+    private final ControladorPlayerLocal contPL = new ControladorPlayerLocal();
     private File musicaTocando;
-    private static ObservableList<Musica> musicList = FXCollections.observableArrayList();
-    private static ObservableList<Playlist> playlistList = FXCollections.observableArrayList();
-    private static ObservableList<Musica> musicasPlaylist = FXCollections.observableArrayList();
-
-    private static ObservableList<ReproducaoMusica> historicoList = FXCollections.observableArrayList();
-
+    private static final ObservableList<Musica> musicList = FXCollections.observableArrayList();
+    private static final ObservableList<Playlist> playlistList = FXCollections.observableArrayList();
+    private static final ObservableList<Musica> musicasPlaylist = FXCollections.observableArrayList();
+    private static final ObservableList<ReproducaoMusica> historicoList = FXCollections.observableArrayList();
     private static boolean trocar = false;
-
     private Playlist playlistSelecionada;
-
-    private Playlist favoritas = new Playlist("Favoritas");
+    private final Playlist favoritas = new Playlist("Favoritas");
     private ArrayList<Musica> playlistTocarInteira = new ArrayList<>();
     private int songNumber;
-
-    private int cont = 0;
 
     @FXML
     private void initialize() {
@@ -141,16 +120,13 @@ public class MainController {
         artistColumn.setCellValueFactory(new PropertyValueFactory<>("artista"));
         albumColumn.setCellValueFactory(new PropertyValueFactory<>("album"));
 
-
         if (trocar) {
 
             if (!playlistSelecionada.getPlaylist().isEmpty()) {
                 musicasPlaylist.removeAll(musicasPlaylist);
                 musicasPlaylist.addAll(playlistSelecionada.getPlaylist());
-                System.out.println("caiu");
             } else {
                 musicasPlaylist.removeAll(musicasPlaylist);
-                System.out.println("oi" + musicasPlaylist);
             }
             musicTableView.setItems(musicasPlaylist);
             trocar = false;
@@ -166,7 +142,6 @@ public class MainController {
         //================
 
         //Tabela de Playlist==================
-        System.out.println("Aqui3");
 
         for (Playlist p : contPL.getMyPlaylists()) {
             if (!playlistList.contains(p)) {
@@ -182,12 +157,7 @@ public class MainController {
         //====================================
 
         musicProgressBar.setStyle("-fx-accent: #8a1cff");
-        volumeSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                player.setVolume(volumeSlider.getValue() * 0.01);
-            }
-        });
+        volumeSlider.valueProperty().addListener((observableValue, number, t1) -> player.setVolume(volumeSlider.getValue() * 0.01));
 
         if (!playlistTocarInteira.isEmpty() && !isPlaying) {
             media = new Media(playlistTocarInteira.get(songNumber).getMp3().toURI().toString());
@@ -208,12 +178,12 @@ public class MainController {
     //adicionar botoes tabela playlist
 
     private void addButtonToTablePlaylist() {
-        Callback<TableColumn<Playlist, Void>, TableCell<Playlist, Void>> cellFactory = new Callback<TableColumn<Playlist, Void>, TableCell<Playlist, Void>>() {
+        Callback<TableColumn<Playlist, Void>, TableCell<Playlist, Void>> cellFactory = new Callback<>() {
             @Override
             public TableCell<Playlist, Void> call(final TableColumn<Playlist, Void> param) {
-                final TableCell<Playlist, Void> cell = new TableCell<Playlist, Void>() {
+                return new TableCell<>() {
 
-                    private final Button btn = new Button("Play");
+                    private final Button btn = new Button("▶");
 
                     {
                         btn.setOnAction((ActionEvent event) -> {
@@ -224,6 +194,7 @@ public class MainController {
                             trocar = true;
                             initialize();
                         });
+                        btn.setStyle("-fx-background-color: #232323; -fx-background-radius: 10; -fx-text-fill: #fff");
                     }
 
                     @Override
@@ -236,7 +207,6 @@ public class MainController {
                         }
                     }
                 };
-                return cell;
             }
         };
 
@@ -245,12 +215,12 @@ public class MainController {
     }
 
     private void addButtonToTableRemovePlaylist() {
-        Callback<TableColumn<Playlist, Void>, TableCell<Playlist, Void>> cellFactory = new Callback<TableColumn<Playlist, Void>, TableCell<Playlist, Void>>() {
+        Callback<TableColumn<Playlist, Void>, TableCell<Playlist, Void>> cellFactory = new Callback<>() {
             @Override
             public TableCell<Playlist, Void> call(final TableColumn<Playlist, Void> param) {
-                final TableCell<Playlist, Void> cell = new TableCell<Playlist, Void>() {
+                return new TableCell<>() {
 
-                    private final Button btn = new Button("Remove");
+                    private final Button btn = new Button("✖");
 
                     {
                         btn.setOnAction((ActionEvent event) -> {
@@ -260,6 +230,8 @@ public class MainController {
                             playlistTableView.setItems(playlistList);
                             contPL.destruirPlaylist(p.getNome());
                         });
+                        btn.setStyle("-fx-background-color: #232323; -fx-background-radius: 10; -fx-text-fill: #ff0000");
+
                     }
 
                     @Override
@@ -272,7 +244,6 @@ public class MainController {
                         }
                     }
                 };
-                return cell;
             }
         };
 
@@ -285,12 +256,12 @@ public class MainController {
 
     //=============Adicionar botoes tabela principal====================
     private void addButtonToTable() {
-        Callback<TableColumn<Musica, Void>, TableCell<Musica, Void>> cellFactory = new Callback<TableColumn<Musica, Void>, TableCell<Musica, Void>>() {
+        Callback<TableColumn<Musica, Void>, TableCell<Musica, Void>> cellFactory = new Callback<>() {
             @Override
             public TableCell<Musica, Void> call(final TableColumn<Musica, Void> param) {
-                final TableCell<Musica, Void> cell = new TableCell<Musica, Void>() {
+                return new TableCell<>() {
 
-                    private final Button btn = new Button("Play");
+                    private final Button btn = new Button("▶");
 
                     {
                         btn.setOnAction((ActionEvent event) -> {
@@ -300,6 +271,7 @@ public class MainController {
                             initialize();
                             playMedia();
                         });
+                        btn.setStyle("-fx-background-color: #232323; -fx-background-radius: 10; -fx-text-fill: #fff");
                     }
 
                     @Override
@@ -312,7 +284,6 @@ public class MainController {
                         }
                     }
                 };
-                return cell;
             }
         };
 
@@ -322,12 +293,12 @@ public class MainController {
 
 
     private void addButtonEraseToTable() {
-        Callback<TableColumn<Musica, Void>, TableCell<Musica, Void>> cellFactory = new Callback<TableColumn<Musica, Void>, TableCell<Musica, Void>>() {
+        Callback<TableColumn<Musica, Void>, TableCell<Musica, Void>> cellFactory = new Callback<>() {
             @Override
             public TableCell<Musica, Void> call(final TableColumn<Musica, Void> param) {
-                final TableCell<Musica, Void> cell = new TableCell<Musica, Void>() {
+                return new TableCell<>() {
 
-                    private final Button btn = new Button("Apagar");
+                    private final Button btn = new Button("✖");
 
                     {
                         btn.setOnAction((ActionEvent event) -> {
@@ -338,6 +309,7 @@ public class MainController {
                             musicList.remove(m);
                             contPL.removerMusica(m.getNome());
                         });
+                        btn.setStyle("-fx-background-color: #232323; -fx-background-radius: 10; -fx-text-fill: #ff0000");
                     }
 
                     @Override
@@ -350,7 +322,6 @@ public class MainController {
                         }
                     }
                 };
-                return cell;
             }
         };
 
@@ -363,7 +334,7 @@ public class MainController {
     public void beginTimer() {
         timer = new Timer();
 
-        task = new TimerTask() {
+        TimerTask task = new TimerTask() {
             public void run() {
 
                 isPlaying = true;
@@ -371,6 +342,7 @@ public class MainController {
                 double end = media.getDuration().toSeconds();
                 System.out.println(current / end);
                 musicProgressBar.setProgress(current / end);
+//                Platform.runLater(() -> musicProgressBar.setProgress(progress));
 
                 if (current / end == 1) {
                     cancelTimer();
@@ -388,14 +360,13 @@ public class MainController {
 
 
     @FXML
-    private void homeButtonClick(ActionEvent event) {
+    private void homeButtonClick() {
         musicTableView.setItems(musicList);
         playlistTocarInteira = contPL.getMySongs();
     }
 
     @FXML
-    private void newSongButtonClick(ActionEvent event) {
-        System.out.println("botão explore clicado");
+    private void newSongButtonClick() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arquivos MP3", "*.mp3"));
         selectedAudioFile = fileChooser.showOpenDialog(newSongButton.getScene().getWindow());
@@ -428,8 +399,7 @@ public class MainController {
     }
 
     @FXML
-    private void recentButtonClick(ActionEvent event) {
-        try {
+    private void recentButtonClick() throws IOException {
             FXMLLoader fxml2Loader = new FXMLLoader(getClass().getResource("fxml/last-played-view.fxml"));
             Parent root3 = fxml2Loader.load();
             Stage thirdStage = new Stage();
@@ -437,9 +407,6 @@ public class MainController {
             thirdStage.setScene(new Scene(root3));
             thirdStage.show();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
@@ -450,16 +417,14 @@ public class MainController {
             }
         }
         lastPlayedTableView.setItems(historicoList);
-        System.out.println("funciona");
     }
 
     @FXML
     private void searchTextFieldEnter() {
-        String search = searchTextField.getText();
     }
 
     @FXML
-    private void editarPlaylistsButtonClick(ActionEvent event) {
+    private void editarPlaylistsButtonClick() {
         if (!searchTextField.getText().isBlank() && !searchTextField.getText().isEmpty()) {
             playlistSelecionada.setNome(searchTextField.getText());
         }
@@ -468,14 +433,14 @@ public class MainController {
     }
 
     @FXML
-    private void removerMusicaPlaylistButtonClick(ActionEvent event) {
+    private void removerMusicaPlaylistButtonClick() {
         playlistSelecionada.removerMusica(contPL.procurarMusica(selectedAudioFile.getName()));
         trocar = true;
         initialize();
     }
 
     @FXML
-    private void adicionarMusicaPlaylistButtonClick(ActionEvent event) {
+    private void adicionarMusicaPlaylistButtonClick() {
         playlistSelecionada.adicionarMusica(contPL.procurarMusica(selectedAudioFile.getName()));
         trocar = true;
         initialize();
@@ -489,8 +454,8 @@ public class MainController {
 //    }
 
     @FXML
-    private void newPlaylistButtonClick(ActionEvent event) {
-        try {
+    private void newPlaylistButtonClick() throws IOException {
+
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/new-playlist.fxml"));
             Parent root2 = fxmlLoader.load();
             Stage secondStage = new Stage();
@@ -498,20 +463,15 @@ public class MainController {
             secondStage.setScene(new Scene(root2));
             secondStage.show();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
     private void favoriteMedia() {
-        System.out.println("media favoritada");
 
         System.out.println(musicaTocando.getName());
 
         contPL.favoritar(musicaTocando);
         if (contPL.procurarMusica(musicaTocando.getName()).getFavorita()) {
-            System.out.println("aqui3");
             favoriteButton.setImage(new Image("images/fullLikedButton.png"));
         } else {
             favoriteButton.setImage(new Image("images/favoritar.png"));
@@ -534,7 +494,6 @@ public class MainController {
 
     @FXML
     private void shuffleMedia() throws IOException {
-        System.out.println("modo aleatorio");
 
         Image image = new Image(new FileInputStream("image.jpg"));
         albumCoverImage.setImage(image);
@@ -576,6 +535,7 @@ public class MainController {
             pausarMusica();
         } else {
             resumirMusica();
+            beginTimer();
         }
     }
 
@@ -603,37 +563,25 @@ public class MainController {
 
     @FXML
     private void loopMedia() {
-        System.out.println("modo loop");
     }
 
     @FXML
     private void saveButtonClick() {
-        System.out.println("Arquivos Salvos");
         contPL.salvar();
     }
 
     @FXML
     private void inputPlaylistNameTextFieldContent() {
-        playlistNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("Texto digitado:" + newValue);
-        });
+        playlistNameTextField.textProperty().addListener((observable, oldValue, newValue) -> System.out.println("Texto digitado:" + newValue));
     }
 
     private void applyColorAnimationDownBar(ImageView imageView) {
-        imageView.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent1) {
-                System.out.println("Entrou");
-                imageView.setOpacity(0.5);
-            }
+        imageView.setOnMouseEntered(mouseEvent1 -> {
+            imageView.setOpacity(0.5);
         });
 
-        imageView.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                System.out.println("Saiu");
-                imageView.setOpacity(1.0);
-            }
+        imageView.setOnMouseExited(mouseEvent -> {
+            imageView.setOpacity(1.0);
         });
     }
 
@@ -667,40 +615,13 @@ public class MainController {
         applyColorAnimationDownBar(loopButton);
     }
 
-    private void applyColorAnimationButton(Button button) {
-
-        button.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                System.out.println("Entrou");
-                button.setStyle("-fx-background-color: #060606");
-            }
-        });
-
-        button.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                System.out.println("Saiu");
-                button.setStyle("-fx-background-color: #121212");
-            }
-        });
-    }
-
     private void applyColorAnimationSideBar(HBox hBox) {
-        hBox.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent2) {
-                System.out.println("Entrou");
-                hBox.setStyle("-fx-background-color: #060606");
-            }
+        hBox.setOnMouseEntered(mouseEvent2 -> {
+            hBox.setStyle("-fx-background-color: #060606");
         });
 
-        hBox.setOnMouseExited(new EventHandler<>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                System.out.println("Saiu");
-                hBox.setStyle("-fx-background-color: #121212");
-            }
+        hBox.setOnMouseExited(mouseEvent -> {
+            hBox.setStyle("-fx-background-color: #121212");
         });
     }
 
@@ -791,7 +712,6 @@ public class MainController {
 
     @FXML
     private void cancelPlaylistButtonClick() {
-        System.out.println("Cancelado");
         Stage stage = (Stage) cancelPlaylistButton.getScene().getWindow();
         stage.close();
     }
