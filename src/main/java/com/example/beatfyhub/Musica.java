@@ -1,9 +1,10 @@
 package com.example.beatfyhub;
 
-import java.io.File;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.LocalDate;
-import java.io.FileInputStream;
-import java.io.IOException;
 
 import javafx.beans.property.StringProperty;
 import javafx.event.EventHandler;
