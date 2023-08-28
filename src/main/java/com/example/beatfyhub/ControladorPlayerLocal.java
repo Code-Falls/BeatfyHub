@@ -102,6 +102,9 @@ public class ControladorPlayerLocal {
         myHistory.salvarArquivo();
     }
 
+    public ArrayList<ReproducaoMusica> getMyHistory() {
+        return myHistory.getMusicasTocadas();
+    }
 
     public ArrayList<Musica> getMySongs() {
         return mySongs.getMusicas();

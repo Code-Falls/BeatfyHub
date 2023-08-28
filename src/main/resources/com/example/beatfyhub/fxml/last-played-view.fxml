@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="303.0" prefWidth="921.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.beatfyhub.MainController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="921.0">
+         <children>
+            <TableView fx:id="lastPlayedTableView" prefHeight="253.0" prefWidth="917.0">
+              <columns>
+                <TableColumn fx:id="lastPlayedColumnNome" prefWidth="290.0" text="Nome" />
+                <TableColumn fx:id="lastPlayedColumnArtista" prefWidth="163.0" text="Artista" />
+                  <TableColumn fx:id="lastPlayedColumnAlbum" prefWidth="176.0" text="Album" />
+                  <TableColumn fx:id="lastPlayedColumnHorario" prefWidth="291.0" text="Horario" />
+              </columns>
+            </TableView>
+            <Button fx:id="loadButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loadButtonClick" text="Carregar" textAlignment="CENTER" />
+         </children>
+      </VBox>
+   </children>
+</Pane>

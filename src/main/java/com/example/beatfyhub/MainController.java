@@ -20,7 +20,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+
 import java.io.*;
+
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -47,28 +49,62 @@ import java.util.*;
 
 public class MainController {
 
-    @FXML private Button homeButton, newFolderButton, newSongButton, recentButton, likedButton, adicionarMusicaPlaylistButton, editarPlaylistButton, removerMusicaPlaylistButton, newPlaylistButton, createPlaylistButton, cancelPlaylistButton;
-    @FXML private ImageView playButton, previousButton, nextButton, loopButton, shuffleButton, favoriteButton, albumCoverImage;
-    @FXML private HBox homeContainer, exploreContainer, recentPlayedContainer, newPlaylistContainer, newSongContainer, newFolderContainer;
-    @FXML private TextField playlistNameTextField, searchTextField;
-    @FXML private ScrollPane musicScrollPane;
-    @FXML private ProgressBar musicProgressBar = new ProgressBar();
-    @FXML private Slider volumeSlider = new Slider();
-    @FXML private Label songLabel, artistLabel;
+    @FXML
+    private Button homeButton, newFolderButton, newSongButton, loadButton, recentButton, likedButton, adicionarMusicaPlaylistButton, editarPlaylistButton, removerMusicaPlaylistButton, newPlaylistButton, createPlaylistButton, cancelPlaylistButton;
+    @FXML
+    private ImageView playButton, previousButton, nextButton, loopButton, shuffleButton, favoriteButton, albumCoverImage;
+    @FXML
+    private HBox homeContainer, exploreContainer, recentPlayedContainer, newPlaylistContainer, newSongContainer, newFolderContainer;
+    @FXML
+    private TextField playlistNameTextField, searchTextField;
+    @FXML
+    private ScrollPane musicScrollPane;
+    @FXML
+    private ProgressBar musicProgressBar = new ProgressBar();
+    @FXML
+    private Slider volumeSlider = new Slider();
+    @FXML
+    private Label songLabel, artistLabel;
     //========TabelaPrincipal============//
-    @FXML private TableView<Musica> musicTableView = new TableView<>();
-    @FXML private TableColumn<Musica, Void> playColumn = new TableColumn<>("Play");
-    @FXML private TableColumn<Musica, Void> optionColumn = new TableColumn<>("Options");
-    @FXML private TableColumn<Musica, String> nameColumn = new TableColumn<>("Nome");
-    @FXML private TableColumn<Musica, String> albumColumn = new TableColumn<>("Album");
-    @FXML private TableColumn<Musica, String> artistColumn = new TableColumn<>("Artista");
+    @FXML
+    private TableView<Musica> musicTableView = new TableView<>();
+    @FXML
+    private TableColumn<Musica, Void> playColumn = new TableColumn<>("Play");
+    @FXML
+    private TableColumn<Musica, Void> optionColumn = new TableColumn<>("Options");
+    @FXML
+    private TableColumn<Musica, String> nameColumn = new TableColumn<>("Nome");
+    @FXML
+    private TableColumn<Musica, String> albumColumn = new TableColumn<>("Album");
+    @FXML
+    private TableColumn<Musica, String> artistColumn = new TableColumn<>("Artista");
     //===================================//
 
     //=========TabelaPlaylists===========//
-    @FXML private TableView<Playlist> playlistTableView = new TableView<>();
-    @FXML private TableColumn<Playlist, Void> playPlaylistColumn = new TableColumn<>("Select");
-    @FXML private TableColumn<Playlist, String> namePlaylistColumn = new TableColumn<>("Nome");
-    @FXML private TableColumn<Playlist, Void> removePlaylistColumn = new TableColumn<>("Remove");
+    @FXML
+    private TableView<Playlist> playlistTableView = new TableView<>();
+    @FXML
+    private TableColumn<Playlist, Void> playPlaylistColumn = new TableColumn<>("Select");
+    @FXML
+    private TableColumn<Playlist, String> namePlaylistColumn = new TableColumn<>("Nome");
+    @FXML
+    private TableColumn<Playlist, Void> removePlaylistColumn = new TableColumn<>("Remove");
+    //===================================//
+
+    //=========TabelaHistorico===========//
+
+    @FXML
+    private TableView<ReproducaoMusica> lastPlayedTableView = new TableView<>();
+    @FXML
+    private TableColumn<ReproducaoMusica, String> lastPlayedColumnNome = new TableColumn<>("Nome");
+    @FXML
+    private TableColumn<ReproducaoMusica, String> lastPlayedColumnArtista = new TableColumn<>("Artista");
+    @FXML
+    private TableColumn<ReproducaoMusica, String> lastPlayedColumnAlbum = new TableColumn<>("Album");
+    @FXML
+    private TableColumn<ReproducaoMusica, LocalDateTime> lastPlayedColumnHorario = new TableColumn<>("Horario");
+
+
     //===================================//
     private Media media;
     private MediaPlayer mediaPlayer;
@@ -84,6 +120,8 @@ public class MainController {
     private static ObservableList<Musica> musicList = FXCollections.observableArrayList();
     private static ObservableList<Playlist> playlistList = FXCollections.observableArrayList();
     private static ObservableList<Musica> musicasPlaylist = FXCollections.observableArrayList();
+
+    private static ObservableList<ReproducaoMusica> historicoList = FXCollections.observableArrayList();
 
     private static boolean trocar = false;
 
@@ -104,26 +142,34 @@ public class MainController {
         albumColumn.setCellValueFactory(new PropertyValueFactory<>("album"));
 
 
-        if(trocar){
+        if (trocar) {
 
-            if(!playlistSelecionada.getPlaylist().isEmpty()){
+            if (!playlistSelecionada.getPlaylist().isEmpty()) {
                 musicasPlaylist.removeAll(musicasPlaylist);
                 musicasPlaylist.addAll(playlistSelecionada.getPlaylist());
                 System.out.println("caiu");
-            }
-            else{
+            } else {
                 musicasPlaylist.removeAll(musicasPlaylist);
-                System.out.println("oi"+musicasPlaylist);
+                System.out.println("oi" + musicasPlaylist);
             }
             musicTableView.setItems(musicasPlaylist);
             trocar = false;
         }
 
+        //Tabela historico
+
+        lastPlayedColumnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        lastPlayedColumnArtista.setCellValueFactory(new PropertyValueFactory<>("artista"));
+        lastPlayedColumnAlbum.setCellValueFactory(new PropertyValueFactory<>("album"));
+        lastPlayedColumnHorario.setCellValueFactory(new PropertyValueFactory<>("horario"));
+
+        //================
+
         //Tabela de Playlist==================
         System.out.println("Aqui3");
 
-        for (Playlist p: contPL.getMyPlaylists()){
-            if(!playlistList.contains(p)){
+        for (Playlist p : contPL.getMyPlaylists()) {
+            if (!playlistList.contains(p)) {
                 playlistList.add(p);
             }
         }
@@ -143,17 +189,17 @@ public class MainController {
             }
         });
 
-        if(!playlistTocarInteira.isEmpty() && !isPlaying){
+        if (!playlistTocarInteira.isEmpty() && !isPlaying) {
             media = new Media(playlistTocarInteira.get(songNumber).getMp3().toURI().toString());
             player = new MediaPlayer(media);
             songLabel.setText(playlistTocarInteira.get(songNumber).getNome());
             artistLabel.setText(playlistTocarInteira.get(songNumber).getArtista());
             albumCoverImage.setImage(playlistTocarInteira.get(songNumber).getImage());
             musicaTocando = playlistTocarInteira.get(songNumber).getMp3();
-            if(contPL.procurarMusica(musicaTocando.getName()).getFavorita()){
+            contPL.salvarReproducao(musicaTocando, LocalDateTime.now());
+            if (contPL.procurarMusica(musicaTocando.getName()).getFavorita()) {
                 favoriteButton.setImage(new Image("images/fullLikedButton.png"));
-            }
-            else {
+            } else {
                 favoriteButton.setImage(new Image("images/favoritar.png"));
             }
         }
@@ -161,7 +207,7 @@ public class MainController {
     }
     //adicionar botoes tabela playlist
 
-    private void addButtonToTablePlaylist(){
+    private void addButtonToTablePlaylist() {
         Callback<TableColumn<Playlist, Void>, TableCell<Playlist, Void>> cellFactory = new Callback<TableColumn<Playlist, Void>, TableCell<Playlist, Void>>() {
             @Override
             public TableCell<Playlist, Void> call(final TableColumn<Playlist, Void> param) {
@@ -198,7 +244,7 @@ public class MainController {
 
     }
 
-    private void addButtonToTableRemovePlaylist(){
+    private void addButtonToTableRemovePlaylist() {
         Callback<TableColumn<Playlist, Void>, TableCell<Playlist, Void>> cellFactory = new Callback<TableColumn<Playlist, Void>, TableCell<Playlist, Void>>() {
             @Override
             public TableCell<Playlist, Void> call(final TableColumn<Playlist, Void> param) {
@@ -238,7 +284,7 @@ public class MainController {
 
 
     //=============Adicionar botoes tabela principal====================
-    private void addButtonToTable(){
+    private void addButtonToTable() {
         Callback<TableColumn<Musica, Void>, TableCell<Musica, Void>> cellFactory = new Callback<TableColumn<Musica, Void>, TableCell<Musica, Void>>() {
             @Override
             public TableCell<Musica, Void> call(final TableColumn<Musica, Void> param) {
@@ -276,7 +322,7 @@ public class MainController {
     }
 
 
-    private void addButtonEraseToTable(){
+    private void addButtonEraseToTable() {
         Callback<TableColumn<Musica, Void>, TableCell<Musica, Void>> cellFactory = new Callback<TableColumn<Musica, Void>, TableCell<Musica, Void>>() {
             @Override
             public TableCell<Musica, Void> call(final TableColumn<Musica, Void> param) {
@@ -287,7 +333,7 @@ public class MainController {
                     {
                         btn.setOnAction((ActionEvent event) -> {
                             Musica m = getTableView().getItems().get(getIndex());
-                            if(player!=null){
+                            if (player != null) {
                                 player.stop();
                             }
                             musicList.remove(m);
@@ -315,7 +361,7 @@ public class MainController {
 
 //========================================================
 
-    public void beginTimer () {
+    public void beginTimer() {
         timer = new Timer();
 
         task = new TimerTask() {
@@ -324,10 +370,10 @@ public class MainController {
                 isPlaying = true;
                 double current = player.getCurrentTime().toSeconds();
                 double end = media.getDuration().toSeconds();
-                System.out.println(current/end);
-                musicProgressBar.setProgress(current/end);
+                System.out.println(current / end);
+                musicProgressBar.setProgress(current / end);
 
-                if (current/end == 1) {
+                if (current / end == 1) {
                     cancelTimer();
                 }
             }
@@ -336,7 +382,7 @@ public class MainController {
     }
 
 
-    public void cancelTimer(){
+    public void cancelTimer() {
         isPlaying = false;
         timer.cancel();
     }
@@ -349,7 +395,7 @@ public class MainController {
     }
 
     @FXML
-    private void newSongButtonClick(ActionEvent event){
+    private void newSongButtonClick(ActionEvent event) {
         System.out.println("botão explore clicado");
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arquivos MP3", "*.mp3"));
@@ -362,7 +408,7 @@ public class MainController {
     }
 
     @FXML
-    private void newFolderButtonClick(){
+    private void newFolderButtonClick() {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         File selectedFolder = directoryChooser.showDialog(newFolderButton.getScene().getWindow());
 
@@ -371,7 +417,7 @@ public class MainController {
             if (musicFiles != null) {
                 for (File mf : musicFiles) {
                     contPL.adicionarMusica(mf);
-                    if(!(musicList.contains(contPL.procurarMusica(mf.getName())))){
+                    if (!(musicList.contains(contPL.procurarMusica(mf.getName())))) {
                         musicList.add(contPL.procurarMusica(mf.getName()));
                     }
                 }
@@ -379,12 +425,33 @@ public class MainController {
         }
         musicTableView.setItems(musicList);
         playlistTocarInteira = contPL.getMySongs();
-    initialize();
+        initialize();
     }
 
     @FXML
     private void recentButtonClick(ActionEvent event) {
-        System.out.println("botão recent played clicado");
+        try {
+            FXMLLoader fxml2Loader = new FXMLLoader(getClass().getResource("fxml/last-played-view.fxml"));
+            Parent root3 = fxml2Loader.load();
+            Stage thirdStage = new Stage();
+            thirdStage.setTitle("Historico");
+            thirdStage.setScene(new Scene(root3));
+            thirdStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void loadButtonClick(){
+        for(ReproducaoMusica rp: contPL.getMyHistory()){
+            if(!historicoList.contains(rp)){
+                historicoList.add(rp);
+            }
+        }
+        lastPlayedTableView.setItems(historicoList);
+        System.out.println("funciona");
     }
 
     @FXML
@@ -394,7 +461,7 @@ public class MainController {
 
     @FXML
     private void editarPlaylistsButtonClick(ActionEvent event) {
-        if(!searchTextField.getText().isBlank() && !searchTextField.getText().isEmpty()){
+        if (!searchTextField.getText().isBlank() && !searchTextField.getText().isEmpty()) {
             playlistSelecionada.setNome(searchTextField.getText());
         }
         trocar = true;
@@ -444,22 +511,21 @@ public class MainController {
         System.out.println(musicaTocando.getName());
 
         contPL.favoritar(musicaTocando);
-        if(contPL.procurarMusica(musicaTocando.getName()).getFavorita()){
+        if (contPL.procurarMusica(musicaTocando.getName()).getFavorita()) {
             System.out.println("aqui3");
             favoriteButton.setImage(new Image("images/fullLikedButton.png"));
-        }
-        else {
+        } else {
             favoriteButton.setImage(new Image("images/favoritar.png"));
         }
 
         playlistList.remove(favoritas);
-        for(Musica m: contPL.getMySongs()){
-            if(m.getFavorita()){
-                if(!favoritas.getPlaylist().contains(m)){
+        for (Musica m : contPL.getMySongs()) {
+            if (m.getFavorita()) {
+                if (!favoritas.getPlaylist().contains(m)) {
                     favoritas.adicionarMusica(m);
                 }
-            } else{
-                if (favoritas.getPlaylist().contains(m)){
+            } else {
+                if (favoritas.getPlaylist().contains(m)) {
                     favoritas.removerMusica(m);
                 }
             }
@@ -468,7 +534,7 @@ public class MainController {
     }
 
     @FXML
-    private void shuffleMedia() throws IOException{
+    private void shuffleMedia() throws IOException {
         System.out.println("modo aleatorio");
 
         Image image = new Image(new FileInputStream("image.jpg"));
@@ -486,13 +552,12 @@ public class MainController {
         if (songNumber > 0) {
             songNumber--;
 
-        }
-        else {
+        } else {
             songNumber = playlistTocarInteira.size() - 1;
 
         }
         player.stop();
-        if(isPlaying) {
+        if (isPlaying) {
             cancelTimer();
         }
 //        media = new Media(playlistTocarInteira.get(songNumber).getMp3().toURI().toString());
@@ -508,26 +573,24 @@ public class MainController {
     @FXML
     private void playMedia() {
         player.setVolume(volumeSlider.getValue() * 0.01);
-        if(isPlaying){
+        if (isPlaying) {
             pausarMusica();
-        }
-        else{
+        } else {
             resumirMusica();
         }
     }
 
     @FXML
     private void nextMedia() {
-        if (songNumber < playlistTocarInteira.size() -1) {
+        if (songNumber < playlistTocarInteira.size() - 1) {
             songNumber++;
 
-        }
-        else {
+        } else {
             songNumber = 0;
 
         }
         player.stop();
-        if(isPlaying) {
+        if (isPlaying) {
             cancelTimer();
         }
 //        media = new Media(playlistTocarInteira.get(songNumber).getMp3().toURI().toString());
@@ -658,7 +721,7 @@ public class MainController {
     }
 
     @FXML
-    private void toColorNewFolderButton(){
+    private void toColorNewFolderButton() {
         applyColorAnimationSideBar(newFolderContainer);
     }
 
@@ -666,7 +729,6 @@ public class MainController {
     private void toColorRecentPlayedButton() {
         applyColorAnimationSideBar(recentPlayedContainer);
     }
-
 
 
     // ===============FUNCOES PLAYER=======================
@@ -700,13 +762,13 @@ public class MainController {
 //        playMedia();
 //    }
 
-    public void pausarMusica(){
+    public void pausarMusica() {
         player.pause();
         playButton.setImage(new Image("images/playButton.png"));
         isPlaying = false;
     }
 
-    public void resumirMusica(){
+    public void resumirMusica() {
         player.play();
         playButton.setImage(new Image("images/pauseButton.png"));
         isPlaying = true;
@@ -721,7 +783,7 @@ public class MainController {
     @FXML
     private void createPlaylistButtonClick() {
         Stage stage = (Stage) createPlaylistButton.getScene().getWindow();
-        if(!playlistNameTextField.getText().isEmpty() && !playlistNameTextField.getText().isBlank()){
+        if (!playlistNameTextField.getText().isEmpty() && !playlistNameTextField.getText().isBlank()) {
             contPL.criarPLaylist(playlistNameTextField.getText());
             initialize();
         }
