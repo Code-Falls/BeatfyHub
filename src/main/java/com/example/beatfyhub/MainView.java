@@ -18,7 +18,8 @@ public class MainView extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/main-view.fxml"));stage.setScene(new Scene(root));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("fxml/main-view.fxml")));
+        stage.setScene(new Scene(root));
         root.prefHeight(700);
         root.prefWidth(1315);
         stage.setTitle("Beat.fy HUB");

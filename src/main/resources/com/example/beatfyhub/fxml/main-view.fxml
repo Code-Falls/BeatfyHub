@@ -278,7 +278,7 @@
                      <children>
                         <ImageView fx:id="shuffleButton" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#shuffleMedia" onMouseEntered="#toColorShuffleButton" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../images/shuffleButton.png" />
+                              <Image url="@../../../../images/coverImage.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="previousButton" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#previousMedia" onMouseEntered="#toColorPreviousButton" pickOnBounds="true" preserveRatio="true">
@@ -296,11 +296,6 @@
                               <Image url="@../../../../images/nextButton.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="loopButton" fitHeight="30.0" fitWidth="30.0" layoutX="101.0" layoutY="10.0" onMouseClicked="#loopMedia" onMouseEntered="#toColorLoopButton" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../images/repeatButton.png" />
-                           </image>
-                        </ImageView>
                      </children>
                      <padding>
                         <Insets top="-20.0" />
@@ -311,7 +306,7 @@
                         <Insets />
                      </VBox.margin>
                      <children>
-                        <Label text="00:00" textFill="WHITE">
+                        <Label fx:id="initialDurationLabel" text="00:00" textFill="WHITE">
                            <padding>
                               <Insets top="-30.0" />
                            </padding>
@@ -319,14 +314,17 @@
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <ProgressBar fx:id="musicProgressBar" prefHeight="18.0" prefWidth="622.0" progress="0.0" />
-                        <Label layoutX="10.0" layoutY="10.0" text="00:00" textFill="WHITE">
+                        <ProgressBar fx:id="musicProgressBar" prefHeight="18.0" prefWidth="622.0" progress="0.0">
+                           <HBox.margin>
+                              <Insets top="-25.0" />
+                           </HBox.margin>
+                           <padding>
+                              <Insets left="5.0" right="5.0" />
+                           </padding></ProgressBar>
+                        <Label fx:id="durationLabel" text="00:00" textFill="WHITE">
                            <padding>
                               <Insets top="-30.0" />
                            </padding>
-                           <font>
-                              <Font size="15.0" />
-                           </font>
                         </Label>
                      </children>
                   </HBox>

@@ -43,7 +43,7 @@ public class MainController {
     @FXML
     private Slider volumeSlider = new Slider();
     @FXML
-    private Label songLabel, artistLabel;
+    private Label songLabel, artistLabel, durationLabel, initialDurationLabel;
     //========TabelaPrincipal============//
     @FXML
     private TableView<Musica> musicTableView = new TableView<>();
@@ -157,6 +157,8 @@ public class MainController {
             albumCoverImage.setImage(playlistTocarInteira.get(songNumber).getImage());
             musicaTocando = playlistTocarInteira.get(songNumber).getMp3();
             contPL.salvarReproducao(musicaTocando, LocalDateTime.now());
+            initialDurationLabel.setText(player.getCurrentTime().toString());
+            durationLabel.setText(player.getTotalDuration().toString());
             if (contPL.procurarMusica(musicaTocando.getName()).getFavorita()) {
                 favoriteButton.setImage(new Image("images/fullLikedButton.png"));
             } else {
@@ -436,12 +438,6 @@ public class MainController {
         initialize();
     }
 
-//    @FXML
-//    private void playlistsButtonClick(ActionEvent event) {
-//        System.out.println("botão playlists clicado");
-//        System.out.println("aqui"+playlistList);
-//        System.out.println("kivbads"+playlistTableView);
-//    }
 
     @FXML
     private void newPlaylistButtonClick() throws IOException {
@@ -458,7 +454,7 @@ public class MainController {
     @FXML
     private void favoriteMedia() {
 
-        System.out.println(musicaTocando.getName());
+        //System.out.println(musicaTocando.getName());
 
         contPL.favoritar(musicaTocando);
         if (contPL.procurarMusica(musicaTocando.getName()).getFavorita()) {
