@@ -296,7 +296,6 @@ public class MainController {
                         btn.setOnAction((ActionEvent event) -> {
                             Musica m = getTableView().getItems().get(getIndex());
                             selectedAudioFile = m.getMp3();
-                            //ToDo arrumar song number na playlist==================================
                             songNumber = contPL.getMySongs().indexOf(m);
                             initialize();
                             playMedia();
