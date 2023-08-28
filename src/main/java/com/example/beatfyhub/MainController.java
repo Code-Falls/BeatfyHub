@@ -249,13 +249,11 @@ public class MainController {
                     {
                         btn.setOnAction((ActionEvent event) -> {
                             Musica m = getTableView().getItems().get(getIndex());
-                            if(isPlaying){
-                                player.stop();
-                            }
                             selectedAudioFile = m.getMp3();
                             //ToDo arrumar song number na playlist==================================
                             songNumber = contPL.getMySongs().indexOf(m);
                             initialize();
+                            playMedia();
                         });
                     }
 
@@ -472,21 +470,16 @@ public class MainController {
     @FXML
     private void shuffleMedia() throws IOException{
         System.out.println("modo aleatorio");
-        getAlbumCover();
-    }
 
-    private void getAlbumCover() throws IOException{
         Image image = new Image(new FileInputStream("image.jpg"));
         albumCoverImage.setImage(image);
-
         albumCoverImage.setFitWidth(70);
         albumCoverImage.setFitHeight(70);
-
         albumCoverImage.setPreserveRatio(false);
-
         albumCoverImage.setSmooth(true);
         albumCoverImage.setCache(true);
     }
+
 
     @FXML
     private void previousMedia() {
@@ -514,6 +507,7 @@ public class MainController {
 
     @FXML
     private void playMedia() {
+        player.setVolume(volumeSlider.getValue() * 0.01);
         if(isPlaying){
             pausarMusica();
         }
