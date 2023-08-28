@@ -30,6 +30,10 @@ public class Playlist {
         return nome;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public ArrayList<Musica> getPlaylist() {
         return playlist;
     }

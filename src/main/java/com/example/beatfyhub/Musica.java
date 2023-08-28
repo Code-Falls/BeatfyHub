@@ -9,6 +9,7 @@ import javafx.beans.property.StringProperty;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
@@ -16,41 +17,84 @@ import org.apache.tika.parser.AutoDetectParser;
 import org.apache.tika.parser.ParseContext;
 import org.apache.tika.parser.Parser;
 import org.apache.tika.sax.BodyContentHandler;
+import org.jaudiotagger.audio.AudioFile;
+import org.jaudiotagger.audio.AudioFileIO;
+import org.jaudiotagger.tag.FieldKey;
+import org.jaudiotagger.tag.Tag;
+import org.jaudiotagger.tag.datatype.Artwork;
+
+import javax.imageio.ImageIO;
 
 public class Musica {
 
     private String nome;
-    private int duracao;
     private String artista;
     private String genero;
-    private LocalDate anoLancamento;
+    private String anoLancamento;
     private Boolean favorita;
     private String album;
     private String path;
+    private Image image;
     private File mp3;
 
-    public Musica(File mp) throws IOException, TikaException,  org.xml.sax.SAXException {
+    public Musica(File mp) throws URISyntaxException {
         this.nome = mp.getName();
         this.mp3 = mp;
         this.path = mp.getAbsolutePath();
         this.favorita = false;
+        metadataCatcher();
+    }
 
-        Parser parser = new AutoDetectParser();
-        BodyContentHandler handler = new BodyContentHandler();
-        Metadata metadata = new Metadata();
-        FileInputStream inputstream = new FileInputStream(mp);
-        ParseContext context = new ParseContext();
+    public void metadataCatcher(){
+        File mp3File = this.mp3;
 
-        parser.parse(inputstream, handler, metadata, context);
-        System.out.println(handler.toString());
+        try {
+            AudioFile audioFile = AudioFileIO.read(mp3File);
+            Tag tag = audioFile.getTag();
 
-        String[] metadataNames = metadata.names();
+            String artist = tag.getFirst(FieldKey.ARTIST);
+            //String title = tag.getFirst(FieldKey.TITLE);
+            String album = tag.getFirst(FieldKey.ALBUM);
+            String genre = tag.getFirst(FieldKey.GENRE);
+            String ano = tag.getFirst(FieldKey.YEAR);
 
-        for (String name : metadataNames) {
-            System.out.println(name + ": " + metadata.get(name));
+            this.album = album;
+            this.artista = artist;
+            this.genero = genre;
+            this.anoLancamento = ano;
+
+            albumCoverCatcher();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
+    public void albumCoverCatcher() {
+        File mp3file = this.mp3;
+
+        try{
+            AudioFile audioFile = AudioFileIO.read(mp3file);
+            Tag tag = audioFile.getTag();
+
+            for (Artwork artwork : tag.getArtworkList()) {
+                byte[] imageData = artwork.getBinaryData();
+
+                System.out.println("aqui5");
+                saveImageToFile(imageData, "image.jpg");
+                System.out.println("aqui");
+
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private static void saveImageToFile(byte[] imageData, String filePath) throws IOException {
+        try (OutputStream outputStream = new FileOutputStream(filePath)){
+            outputStream.write(imageData);
+        }
+    }
 
     public String getNome() {
         return nome;
@@ -69,10 +113,6 @@ public class Musica {
         return mp3;
     }
 
-    public int getDuracao() {
-        return duracao;
-    }
-
     public String getArtista() {
         return artista;
     }
@@ -81,12 +121,16 @@ public class Musica {
         return genero;
     }
 
-    public LocalDate getAnoLancamento() {
+    public String getAnoLancamento() {
         return anoLancamento;
     }
 
     public Boolean getFavorita() {
         return favorita;
+    }
+
+    public Image getImage() {
+        return image;
     }
 
     public String getAlbum() {
@@ -97,11 +141,4 @@ public class Musica {
         return path;
     }
 
-//    public Button getPlay() {
-//        return play;
-//    }
-//
-//    public Button getOptions() {
-//        return options;
-//    }
 }
